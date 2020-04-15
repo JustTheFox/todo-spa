@@ -1,16 +1,16 @@
 import React, { StrictMode } from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 import App from './app';
+import { store } from './store/store';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-import axios from 'axios';
-
-axios
-  .get('https://jsonplaceholder.typicode.com/posts/1')
-  .then((response) => console.log(response));
 
 render(
   <StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </StrictMode>,
   document.getElementById('root'),
 );
