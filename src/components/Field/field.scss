@@ -1,0 +1,14 @@
+@import '../../styles/index';
+
+.field {
+  width: 300px;
+
+  &__input {
+    width: 100%;
+    height: $field-height;
+  }
+
+  & + & {
+    margin-top: 12px;
+  }
+}

@@ -1,0 +1,40 @@
+@font-face {
+  font-display: swap;
+  font-family: 'AvenirNextCyr';
+  src:
+          url("../assets/fonts/AvenirNextCyr-Regular.ttf") format("truetype"),
+  url('../assets/fonts/AvenirNextCyr-Regular.woff') format('woff'),
+  url('../assets/fonts/AvenirNextCyr-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-display: swap;
+  font-family: 'AvenirNextCyr';
+  src:
+          url("../assets/fonts/AvenirNextCyr-Medium.ttf") format("truetype"),
+  url('../assets/fonts/AvenirNextCyr-Medium.woff') format('woff'),
+  url('../assets/fonts/AvenirNextCyr-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-display: swap;
+  font-family: 'AvenirNextCyr';
+  src:
+          url("../assets/fonts/AvenirNextCyr-MediumItalic.ttf") format("truetype"),
+  url('../assets/fonts/AvenirNextCyr-MediumItalic.woff') format('woff'),
+  url('../assets/fonts/AvenirNextCyr-MediumItalic.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-display: swap;
+  font-family: 'AvenirNextCyr';
+  src:
+          url("../assets/fonts/AvenirNextCyr-Demi.ttf") format("truetype"),
+  url('../assets/fonts/AvenirNextCyr-Demi.woff') format('woff'),
+  url('../assets/fonts/AvenirNextCyr-Demi.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+}

@@ -1,0 +1,9 @@
+@import '../../styles/index';
+
+.item {
+  padding-left: 0;
+
+  & + & {
+    margin-top: 12px;
+  }
+}
