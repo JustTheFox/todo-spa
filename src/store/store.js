@@ -8,20 +8,30 @@ const initialState =
             id: uuid(),
             title: 'Create App',
             description: 'Cоздаем первое SPA :)',
-            completed: false,
+            timestamp: 1587228097274,
+            done: false,
             postponed: false,
             liked: false
+        },
+        {
+            id: uuid(),
+            title: 'Что нужно сделать',
+            description: 'Возможность создавать список; Поиск по заголовкам;',
+            timestamp: 1587228097274,
+            done: false,
+            postponed: false,
+            liked: true
         }
     ]}
 ;
 
 const toggleTask = (state, payload) => {
   const copy = state.tasks.map((task) => {
-    const { id, completed } = task;
+    const { id, done } = task;
     if (id === payload ) {
       return {
         ...task,
-        completed: !completed,
+        done: !done,
       }
     } return task;
   });

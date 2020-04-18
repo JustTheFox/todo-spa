@@ -13,7 +13,7 @@ const TaskForm = () => {
     date: null,
     title: '',
     description: '',
-    completed: false,
+    done: false,
     postponed: false,
     liked: false,
   };
@@ -39,7 +39,7 @@ const TaskForm = () => {
     addTask({
       ...task,
       id: uuid(),
-      date: new Date(),
+      date: Date.now(),
     });
     setTask(initialState);
   };
@@ -50,12 +50,14 @@ const TaskForm = () => {
         <Field
           type="text"
           name="title"
+          placeholder="Заголовок"
           value={task.title}
           onChange={onChange}
         />
         <Field
           type="text"
           name="description"
+          placeholder="Описание"
           value={task.description}
           onChange={onChange}
         />
