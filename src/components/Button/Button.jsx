@@ -5,6 +5,9 @@ const Button = ({
   type = 'submit',
   children,
   onClick,
+  theme = 'primary',
+  block,
+  icon,
   className,
   ...props
 }) => {
@@ -12,7 +15,18 @@ const Button = ({
     <button
       type={type}
       onClick={onClick}
-      className={cn('btn', 'btn-primary', className)}
+      className={cn(
+        'btn',
+        {
+          'btn-primary': theme === 'primary',
+          'btn-secondary': theme === 'secondary',
+          'btn-success': theme === 'success',
+          'btn-danger': theme === 'danger',
+          'btn-block': block,
+          'btn-icon': icon,
+        },
+        className,
+      )}
       {...props}
     >
       {children}

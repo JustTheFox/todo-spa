@@ -1,7 +1,8 @@
 @import '../../styles/index';
 
 .form {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  display: block;
+  width: 100%;
+  max-width: $content-width;
+  margin: 0 auto;
 }

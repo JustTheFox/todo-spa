@@ -1,16 +1,16 @@
 import React from 'react';
 import './field.scss';
 
-const Field = ({ onChange, ...props }) => {
+// eslint-disable-next-line import/prefer-default-export
+export const Textarea = ({ onChange, ...props }) => {
   return (
     <div className="field">
-      <input
+      <textarea
         className="form-control field__input"
+        cols={2}
         onChange={onChange}
         {...props}
       />
     </div>
   );
 };
-
-export default Field;

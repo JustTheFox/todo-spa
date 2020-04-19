@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import uuid from 'uuid/v4';
+import { v4 } from 'uuid';
 import Form from '../Form/Form';
-import Field from '../Field/Field';
+import { Input, Textarea } from '../Field';
 import Button from '../Button/Button';
 import { addTaskAction } from '../../store/actions';
 import './task-form.scss';
@@ -10,11 +10,10 @@ import './task-form.scss';
 const TaskForm = () => {
   const initialState = {
     id: null,
-    date: null,
     title: '',
     description: '',
+    timestamp: null,
     done: false,
-    postponed: false,
     liked: false,
   };
   const [task, setTask] = useState(initialState);
@@ -36,32 +35,37 @@ const TaskForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addTask({
-      ...task,
-      id: uuid(),
-      date: Date.now(),
-    });
-    setTask(initialState);
+
+    if (task.title.trim()) {
+      addTask({
+        ...task,
+        id: v4(),
+        timestamp: Date.now(),
+      });
+      setTask(initialState);
+    }
   };
 
   return (
     <div className="task-form">
       <Form onSubmit={onSubmit}>
-        <Field
+        <Input
           type="text"
           name="title"
           placeholder="Заголовок"
           value={task.title}
           onChange={onChange}
         />
-        <Field
+        <Textarea
           type="text"
           name="description"
           placeholder="Описание"
           value={task.description}
           onChange={onChange}
         />
-        <Button className="mt-3">Add</Button>
+        <div className="task-form__buttons mt-3">
+          <Button theme="primary">Создать</Button>
+        </div>
       </Form>
     </div>
   );

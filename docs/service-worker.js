@@ -6,15 +6,15 @@
  * See https://goo.gl/nhQhGp
  *
  * The rest of the code is auto-generated. Please don't update this file
- * directly; instead, make changes to your Workbox docs configuration
- * and re-run your docs process.
+ * directly; instead, make changes to your Workbox build configuration
+ * and re-run your build process.
  * See https://goo.gl/2aRDsh
  */
 
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "./precache-manifest.89e0de24318b11dae2ac173d82e220a3.js"
+  "./precache-manifest.1708589c28c4008498043dce0dde90b6.js"
 );
 
 self.addEventListener('message', (event) => {

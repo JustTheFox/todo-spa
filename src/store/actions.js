@@ -2,8 +2,8 @@ import {
   ADD_TASK,
   DELETE_TASK,
   TOGGLE_TASK,
-  PUT_OFF_TASK,
   LIKE_TASK,
+  TOGGLE_THEME,
 } from './const';
 
 export const addTaskAction = (task) => ({
@@ -21,12 +21,12 @@ export const toggleTaskAction = (id) => ({
   payload: id,
 });
 
-export const putOffTaskAction = (id) => ({
-  type: PUT_OFF_TASK,
-  payload: id,
-});
-
 export const likeTaskAction = (id) => ({
   type: LIKE_TASK,
   payload: id,
+});
+
+export const toggleThemeAction = (theme) => ({
+  type: TOGGLE_THEME,
+  payload: theme,
 });
