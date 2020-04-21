@@ -1,0 +1,16 @@
+@import '../../styles/index';
+
+.filter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  padding: 0;
+  list-style: none;
+}
+
+.filter-item {
+  &:not(:last-child) {
+    margin-right: 8px;
+  }
+}

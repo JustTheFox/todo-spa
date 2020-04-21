@@ -1,0 +1,11 @@
+@import '../../styles/index';
+
+.btn {
+  color: var(--theme-ui-colors-text-primary);
+
+  &-icon {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+}

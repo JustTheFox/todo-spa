@@ -1,4 +1,4 @@
-import { FILTERS } from './actions';
+import { FILTERS } from './const';
 
 export const getFilteredTasks = (tasks, filter) => {
   switch (filter) {
@@ -11,6 +11,6 @@ export const getFilteredTasks = (tasks, filter) => {
     case FILTERS.SHOW_COMPLETED:
       return tasks.filter((t) => t.done);
     default:
-      throw new Error('Unknown filter: ' + filter);
+      throw new Error(`Unknown filter: ${filter}`);
   }
 };

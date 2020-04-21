@@ -1,0 +1,12 @@
+@import '../../styles/index';
+
+.content {
+  width: 100%;
+  max-width: $content-width;
+  margin: 0 auto;
+  padding: 32px;
+
+  @media (max-width: 768px) {
+    padding: 32px 16px;
+  }
+}

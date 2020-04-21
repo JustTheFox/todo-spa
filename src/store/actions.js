@@ -5,6 +5,7 @@ import {
   LIKE_TASK,
   TOGGLE_THEME,
   SET_FILTER,
+  SET_SEARCH_VALUE,
 } from './const';
 
 export const addTaskAction = (task) => ({
@@ -32,14 +33,12 @@ export const toggleThemeAction = (theme) => ({
   payload: theme,
 });
 
-export const FILTERS = {
-  SHOW_ALL: 'SHOW_ALL',
-  SHOW_FAVORITE: 'SHOW_FAVORITE',
-  SHOW_ACTIVE: 'SHOW_ACTIVE',
-  SHOW_COMPLETED: 'SHOW_COMPLETED',
-};
-
 export const filterTaskAction = (filter) => ({
   type: SET_FILTER,
   payload: filter,
+});
+
+export const setSearchValueAction = (value) => ({
+  type: SET_SEARCH_VALUE,
+  payload: value,
 });

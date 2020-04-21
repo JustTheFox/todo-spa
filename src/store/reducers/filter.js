@@ -1,5 +1,4 @@
-import { SET_FILTER } from '../const';
-import { FILTERS } from '../actions';
+import { SET_FILTER, FILTERS } from '../const';
 
 export default (state = FILTERS.SHOW_ALL, { type, payload }) => {
   switch (type) {
