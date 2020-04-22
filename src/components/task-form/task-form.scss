@@ -3,6 +3,12 @@
 .task-form {
   margin-bottom: 32px;
 
+  &__add-list {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+  }
+
   &__buttons {
     display: flex;
     justify-content: flex-end;

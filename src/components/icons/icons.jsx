@@ -143,3 +143,100 @@ export const IconSearch = (props) => (
     />
   </Icon>
 );
+
+export const IconList = (props) => (
+  <Icon
+    width={16}
+    height={16}
+    viewBox="0 0 16 16"
+    fill="currentColor"
+    {...props}
+  >
+    <path
+      fillRule="evenodd"
+      d="M2 2.5a.5.5 0 00-.5.5v1a.5.5 0 00.5.5h1a.5.5 0 00.5-.5V3a.5.5 0 00-.5-.5H2zM3 3H2v1h1V3z"
+      clipRule="evenodd"
+    />
+    <path d="M5 3.5a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5zM5.5 7a.5.5 0 000 1h9a.5.5 0 000-1h-9zm0 4a.5.5 0 000 1h9a.5.5 0 000-1h-9z" />
+    <path
+      fillRule="evenodd"
+      d="M1.5 7a.5.5 0 01.5-.5h1a.5.5 0 01.5.5v1a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 00-.5.5v1a.5.5 0 00.5.5h1a.5.5 0 00.5-.5v-1a.5.5 0 00-.5-.5H2zm1 .5H2v1h1v-1z"
+      clipRule="evenodd"
+    />
+  </Icon>
+);
+
+export const IconCheck = (props) => (
+  <Icon
+    width={16}
+    height={16}
+    viewBox="0 0 16 16"
+    fill="currentColor"
+    {...props}
+  >
+    <path
+      fillRule="evenodd"
+      d="M13.854 3.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3.5-3.5a.5.5 0 11.708-.708L6.5 10.293l6.646-6.647a.5.5 0 01.708 0z"
+      clipRule="evenodd"
+    />
+  </Icon>
+);
+
+export const IconCheckAll = (props) => (
+  <Icon
+    width={16}
+    height={16}
+    viewBox="0 0 16 16"
+    fill="currentColor"
+    {...props}
+  >
+    <path
+      fillRule="evenodd"
+      d="M12.354 3.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3.5-3.5a.5.5 0 11.708-.708L5 10.293l6.646-6.647a.5.5 0 01.708 0z"
+      clipRule="evenodd"
+    />
+    <path d="M6.25 8.043l-.896-.897a.5.5 0 10-.708.708l.897.896.707-.707zm1 2.414l.896.897a.5.5 0 00.708 0l7-7a.5.5 0 00-.708-.708L8.5 10.293l-.543-.543-.707.707z" />
+  </Icon>
+);
+
+export const IconText = (props) => (
+  <Icon
+    width={16}
+    height={16}
+    viewBox="0 0 16 16"
+    fill="currentColor"
+    {...props}
+  >
+    <path
+      fillRule="evenodd"
+      d="M14.5 3h-13a.5.5 0 00-.5.5v9a.5.5 0 00.5.5h13a.5.5 0 00.5-.5v-9a.5.5 0 00-.5-.5zm-13-1A1.5 1.5 0 000 3.5v9A1.5 1.5 0 001.5 14h13a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0014.5 2h-13z"
+      clipRule="evenodd"
+    />
+    <path
+      fillRule="evenodd"
+      d="M3 5.5a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5zM3 8a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9A.5.5 0 013 8zm0 2.5a.5.5 0 01.5-.5h6a.5.5 0 010 1h-6a.5.5 0 01-.5-.5z"
+      clipRule="evenodd"
+    />
+  </Icon>
+);
+
+export const IconPlus = (props) => (
+  <Icon
+    width={16}
+    height={16}
+    viewBox="0 0 16 16"
+    fill="currentColor"
+    {...props}
+  >
+    <path
+      fillRule="evenodd"
+      d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z"
+      clipRule="evenodd"
+    />
+    <path
+      fillRule="evenodd"
+      d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z"
+      clipRule="evenodd"
+    />
+  </Icon>
+);

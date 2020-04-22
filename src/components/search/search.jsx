@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import SearchInput from 'react-search-input';
 import { setSearchValueAction } from '../../store/actions';

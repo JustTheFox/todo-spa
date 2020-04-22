@@ -9,9 +9,24 @@ import {
 } from '../../store/actions';
 import { parseDate } from '../../services/utils';
 import './task-item.scss';
-import { IconFavorite, IconTrash } from '../icons/icons';
+import {
+  IconCheck,
+  IconCheckAll,
+  IconFavorite,
+  IconTrash,
+} from '../icons/icons';
+import TaskSubList from '../task-sub-list/task-sub-list';
+import TaskSubItem from '../task-sub-item/task-sub-item';
 
-const TaskItem = ({ id, title, description, timestamp, done, liked }) => {
+const TaskItem = ({
+  id,
+  title,
+  description,
+  list = [],
+  timestamp,
+  done,
+  liked,
+}) => {
   const dispatch = useDispatch();
 
   const onDelete = useCallback(() => {
@@ -39,6 +54,20 @@ const TaskItem = ({ id, title, description, timestamp, done, liked }) => {
         {title}
       </h2>
       {description && <p className="task-item__description">{description}</p>}
+      {list.length > 0 && (
+        <TaskSubList>
+          {list.map(({ id: itemId, title: itemTitle, done: itemDone }) => (
+            <TaskSubItem
+              key={itemId}
+              taskId={id}
+              itemId={itemId}
+              itemTitle={itemTitle}
+              itemDone={itemDone}
+              className="task-item__list-item"
+            />
+          ))}
+        </TaskSubList>
+      )}
       <div className="task-item__footer">
         {date && time && (
           <span className="task-item__date">{`${date} ${time}`}</span>
@@ -50,7 +79,7 @@ const TaskItem = ({ id, title, description, timestamp, done, liked }) => {
             className="mr-2"
             onClick={onToggle}
           >
-            {done ? 'Не сделано' : 'Сделано'}
+            {done ? <IconCheckAll /> : <IconCheck />}
           </Button>
           <Button
             type="button"

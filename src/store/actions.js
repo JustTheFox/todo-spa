@@ -2,6 +2,7 @@ import {
   ADD_TASK,
   DELETE_TASK,
   TOGGLE_TASK,
+  TOGGLE_LIST_ITEM,
   LIKE_TASK,
   TOGGLE_THEME,
   SET_FILTER,
@@ -21,6 +22,14 @@ export const deleteTaskAction = (id) => ({
 export const toggleTaskAction = (id) => ({
   type: TOGGLE_TASK,
   payload: id,
+});
+
+export const toggleListItemAction = (taskId, itemId) => ({
+  type: TOGGLE_LIST_ITEM,
+  payload: {
+    taskId,
+    itemId,
+  },
 });
 
 export const likeTaskAction = (id) => ({
