@@ -4,7 +4,6 @@ import {
   TOGGLE_TASK,
   TOGGLE_LIST_ITEM,
   LIKE_TASK,
-  TOGGLE_THEME,
   SET_FILTER,
   SET_SEARCH_VALUE,
 } from './const';
@@ -35,11 +34,6 @@ export const toggleListItemAction = (taskId, itemId) => ({
 export const likeTaskAction = (id) => ({
   type: LIKE_TASK,
   payload: id,
-});
-
-export const toggleThemeAction = (theme) => ({
-  type: TOGGLE_THEME,
-  payload: theme,
 });
 
 export const filterTaskAction = (filter) => ({

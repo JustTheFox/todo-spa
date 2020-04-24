@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { v4 } from 'uuid';
-import Form from '../form/Form';
+import Form from '../form/form';
 import { Input, Textarea } from '../field';
 import Button from '../button/button';
 import { IconList, IconPlus, IconText } from '../icons/icons';

@@ -1,2 +1,2 @@
-export { Input } from './Input';
-export { Textarea } from './Textarea';
+export { Input } from './input';
+export { Textarea } from './textarea';

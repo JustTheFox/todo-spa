@@ -6,6 +6,7 @@
   &__input {
     width: 100%;
     height: $field-height;
+    background: var(--theme-ui-colors-input);
 
     &[textarea] {
       resize: vertical;

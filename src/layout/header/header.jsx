@@ -1,26 +1,19 @@
-import React, { useCallback, useEffect } from 'react';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
 import Logo from '../../components/logo/logo';
 import Search from '../../components/search/search';
 import Button from '../../components/button/button';
 import { IconMoon, IconSun } from '../../components/icons/icons';
-import { toggleThemeAction } from '../../store/actions';
-import { THEME } from '../../store/const';
+import { useTheme } from '../../context/theme-context';
 import './header.scss';
 
 const Header = () => {
-  const theme = useSelector((store) => store.theme, shallowEqual);
-  const dispatch = useDispatch();
-
-  const onChangeTheme = useCallback(() => {
-    dispatch(toggleThemeAction());
-  }, [dispatch]);
+  const { THEMES, theme, onSetTheme } = useTheme();
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
-  const btnTheme = theme === THEME.DARK ? 'light' : 'dark';
+  const btnTheme = theme === THEMES.DARK ? 'light' : 'dark';
 
   return (
     <header className="header">
@@ -31,8 +24,8 @@ const Header = () => {
         <Search />
       </div>
       <div className="header__theme-btn">
-        <Button theme={btnTheme} icon onClick={onChangeTheme}>
-          {theme === THEME.DARK ? <IconSun /> : <IconMoon />}
+        <Button theme={btnTheme} icon onClick={onSetTheme}>
+          {theme === THEMES.DARK ? <IconSun /> : <IconMoon />}
         </Button>
       </div>
     </header>
