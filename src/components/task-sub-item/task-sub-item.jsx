@@ -10,15 +10,17 @@ const TaskSubItem = ({ taskId, itemId, itemTitle, itemDone }) => {
   }, [dispatch, taskId, itemId]);
 
   return (
-    <li className="task-sub-item">
-      <input
-        type="checkbox"
-        name={`_item${itemId.toString()}`}
-        checked={itemDone}
-        className="mr-3"
-        onChange={onListItemChange}
-      />
-      {itemTitle}
+    <li className="form-check task-sub-item">
+      <label className="form-check-label">
+        <input
+          type="checkbox"
+          name={`_item${itemId.toString()}`}
+          checked={itemDone}
+          className="form-check-input mr-3"
+          onChange={onListItemChange}
+        />
+        {itemTitle}
+      </label>
     </li>
   );
 };

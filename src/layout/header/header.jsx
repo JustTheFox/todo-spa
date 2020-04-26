@@ -24,7 +24,12 @@ const Header = () => {
         <Search />
       </div>
       <div className="header__theme-btn">
-        <Button theme={btnTheme} icon onClick={onSetTheme}>
+        <Button
+          theme={btnTheme}
+          className="btn--toggle"
+          icon
+          onClick={onSetTheme}
+        >
           {theme === THEMES.DARK ? <IconSun /> : <IconMoon />}
         </Button>
       </div>

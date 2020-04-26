@@ -1,13 +1,14 @@
+const normalizeTime = (time) => (time < 10 ? `0${time}` : time);
+
 export const parseDate = (timestamp) => {
   const date = new Date(timestamp);
   const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const normalizeMonth = month < 10 ? `0${month}` : month;
+  const month = normalizeTime(date.getMonth() + 1);
   const day = date.getDate();
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
+  const hours = normalizeTime(date.getHours());
+  const minutes = normalizeTime(date.getMinutes());
   return {
-    date: `${day}-${normalizeMonth}-${year}`,
+    date: `${day}-${month}-${year}`,
     time: `${hours}:${minutes}`,
   };
 };

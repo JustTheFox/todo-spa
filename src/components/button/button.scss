@@ -1,11 +1,15 @@
 @import '../../styles/index';
 
 .btn {
-  color: var(--theme-ui-colors-button);
+  color: var(--theme-ui-colors-button-text-primary);
 
   &-icon {
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
+  }
+
+  &--toggle {
+    color: var(--theme-ui-colors-button-text-secondary);
   }
 }
