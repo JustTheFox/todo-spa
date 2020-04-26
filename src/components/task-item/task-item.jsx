@@ -6,7 +6,7 @@ import {
   deleteTaskAction,
   likeTaskAction,
   toggleTaskAction,
-} from '../../store/actions';
+} from '../../store/actions/tasks';
 import { parseDate } from '../../services/utils';
 import './task-item.scss';
 import {

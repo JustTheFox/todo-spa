@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { toggleListItemAction } from '../../store/actions';
+import { toggleListItemAction } from '../../store/actions/tasks';
 import './task-sub-item.scss';
 
 const TaskSubItem = ({ taskId, itemId, itemTitle, itemDone }) => {

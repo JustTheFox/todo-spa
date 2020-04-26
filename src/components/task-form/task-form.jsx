@@ -5,7 +5,7 @@ import Form from '../form/form';
 import { Input, Textarea } from '../field';
 import Button from '../button/button';
 import { IconList, IconPlus, IconText } from '../icons/icons';
-import { addTaskAction } from '../../store/actions';
+import { addTaskAction } from '../../store/actions/tasks';
 import './task-form.scss';
 
 const TaskForm = () => {

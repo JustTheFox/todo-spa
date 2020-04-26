@@ -1,63 +1,27 @@
-import { v4 } from 'uuid';
 import {
-  ADD_TASK,
-  DELETE_TASK,
+  FETCH_TASKS_STARTED,
+  FETCH_TASKS_SUCCESS,
+  FETCH_TASKS_FAILURE,
+  ADD_TASK_STARTED,
+  ADD_TASK_SUCCESS,
+  ADD_TASK_FAILURE,
+  DELETE_TASK_STARTED,
+  DELETE_TASK_SUCCESS,
+  DELETE_TASK_FAILURE,
   TOGGLE_TASK,
   LIKE_TASK,
   TOGGLE_LIST_ITEM,
 } from '../const';
 
-const initialState = [
-  {
-    id: v4(),
-    title: 'Create App',
-    description: 'Cоздаем первое SPA :)',
-    list: [],
-    timestamp: 1587228097274,
-    done: false,
-    postponed: false,
-    liked: false,
-  },
-  {
-    id: v4(),
-    title: 'Что нужно сделать',
-    description: 'Подзадачи:',
-    list: [
-      {
-        id: 1,
-        title: 'Базовый UI/UX;',
-        done: true,
-      },
-      {
-        id: 2,
-        title: 'Фильтрация по параметрам: все, активные, завершенные;',
-        done: true,
-      },
-      {
-        id: 3,
-        title: 'Возможность создавать список;',
-        done: true,
-      },
-      {
-        id: 4,
-        title: 'Поиск по заголовкам и описанию;',
-        done: true,
-      },
-      {
-        id: 5,
-        title: 'Вывести initialState в мок и ссимулировать запрос;',
-        done: false,
-      },
-    ],
-    timestamp: 1587228097274,
-    done: false,
-    postponed: false,
-    liked: true,
-  },
-];
+const initialState = {
+  taskList: [],
+  loading: false,
+  error: '',
+};
 
-const toggleTask = (state, payload) => {
-  return state.map((task) => {
+const toggleTask = (state, payload) => ({
+  ...state,
+  taskList: state.taskList.map((task) => {
     const { id, done } = task;
     if (id === payload) {
       return {
@@ -66,11 +30,11 @@ const toggleTask = (state, payload) => {
       };
     }
     return task;
-  });
-};
+  }),
+});
 
 const toggleListItem = (state, { taskId, itemId }) => {
-  const [{ list }] = state.filter(({ id }) => id === taskId);
+  const [{ list }] = state.taskList.filter(({ id }) => id === taskId);
 
   const copyList = list.map((item) => {
     const { id, done } = item;
@@ -83,20 +47,24 @@ const toggleListItem = (state, { taskId, itemId }) => {
     return item;
   });
 
-  return state.map((task) => {
-    const { id } = task;
-    if (id === taskId) {
-      return {
-        ...task,
-        list: copyList,
-      };
-    }
-    return task;
-  });
+  return {
+    ...state,
+    taskList: state.taskList.map((task) => {
+      const { id } = task;
+      if (id === taskId) {
+        return {
+          ...task,
+          list: copyList,
+        };
+      }
+      return task;
+    }),
+  };
 };
 
-const likeTask = (state, payload) => {
-  return state.map((task) => {
+const likeTask = (state, payload) => ({
+  ...state,
+  taskList: state.taskList.map((task) => {
     const { id, liked } = task;
     if (id === payload) {
       return {
@@ -105,15 +73,63 @@ const likeTask = (state, payload) => {
       };
     }
     return task;
-  });
-};
+  }),
+});
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case ADD_TASK:
-      return [payload, ...state];
-    case DELETE_TASK:
-      return state.filter(({ id }) => id !== payload);
+    case FETCH_TASKS_STARTED:
+      return {
+        ...state,
+        loading: true,
+      };
+    case FETCH_TASKS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        taskList: [...payload],
+      };
+    case FETCH_TASKS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: payload,
+      };
+    case ADD_TASK_STARTED:
+      return {
+        ...state,
+        loading: true,
+      };
+    case ADD_TASK_SUCCESS:
+      return {
+        ...state,
+        taskList: [payload, ...state.taskList],
+        loading: false,
+      };
+    case ADD_TASK_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: payload,
+      };
+    case DELETE_TASK_STARTED:
+      return {
+        ...state,
+        loading: true,
+      };
+    case DELETE_TASK_SUCCESS:
+      return {
+        ...state,
+        taskList: state.taskList.filter(({ id }) => id !== payload),
+        loading: false,
+        error: '',
+      };
+    case DELETE_TASK_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: payload,
+      };
     case TOGGLE_TASK:
       return toggleTask(state, payload);
     case LIKE_TASK:

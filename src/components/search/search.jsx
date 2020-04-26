@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import SearchInput from 'react-search-input';
-import { setSearchValueAction } from '../../store/actions';
+import { setSearchValueAction } from '../../store/actions/search';
 import './search.scss';
 
 const Search = () => {
