@@ -9,9 +9,10 @@ import {
   ADD_TASK_STARTED,
   ADD_TASK_SUCCESS,
   ADD_TASK_FAILURE,
-  TOGGLE_TASK,
-  TOGGLE_LIST_ITEM,
-  LIKE_TASK,
+  TOGGLE_TASK_SUCCESS,
+  TOGGLE_TASK_FAILURE,
+  LIKE_TASK_SUCCESS,
+  LIKE_TASK_FAILURE,
 } from '../const';
 
 export const fetchTasksStart = () => {
@@ -34,18 +35,16 @@ export const fetchTasksFailure = (err) => {
   };
 };
 
-export const fetchTasks = () => {
-  return (dispatch) => {
-    dispatch(fetchTasksStart());
-    axios
-      .get('http://localhost:3004/tasks?_sort=timestamp&_order=desc')
-      .then((res) => {
-        dispatch(fetchTasksSuccess(res.data));
-      })
-      .catch((err) => {
-        dispatch(fetchTasksFailure(err.message));
-      });
-  };
+export const fetchTasks = () => (dispatch) => {
+  dispatch(fetchTasksStart());
+  axios
+    .get('http://localhost:3004/tasks?_sort=timestamp&_order=desc')
+    .then((res) => {
+      dispatch(fetchTasksSuccess(res.data));
+    })
+    .catch((err) => {
+      dispatch(fetchTasksFailure(err.message));
+    });
 };
 
 export const deleteTasksStart = () => {
@@ -68,18 +67,16 @@ export const deleteTasksFailure = (err) => {
   };
 };
 
-export const deleteTaskAction = (id) => {
-  return (dispatch) => {
-    dispatch(deleteTasksStart());
-    axios
-      .delete(`http://localhost:3004/tasks/${id}`)
-      .then(() => {
-        dispatch(deleteTasksSuccess(id));
-      })
-      .catch((err) => {
-        dispatch(deleteTasksFailure(err.message));
-      });
-  };
+export const deleteTaskAction = (id) => (dispatch) => {
+  dispatch(deleteTasksStart());
+  axios
+    .delete(`http://localhost:3004/tasks/${id}`)
+    .then(() => {
+      dispatch(deleteTasksSuccess(id));
+    })
+    .catch((err) => {
+      dispatch(deleteTasksFailure(err.message));
+    });
 };
 
 export const addTaskStart = () => ({
@@ -98,34 +95,72 @@ export const addTaskFailure = (error) => ({
   },
 });
 
-export const addTaskAction = (task) => {
-  return (dispatch) => {
-    dispatch(addTaskStart());
-    axios
-      .post('http://localhost:3004/tasks/', task)
-      .then(() => {
-        dispatch(addTaskSuccess(task));
-      })
-      .catch((err) => {
-        dispatch(addTaskFailure(err.message));
-      });
-  };
+export const addTaskAction = (task) => (dispatch) => {
+  dispatch(addTaskStart());
+  axios
+    .post('http://localhost:3004/tasks/', task)
+    .then(() => {
+      dispatch(addTaskSuccess(task));
+    })
+    .catch((err) => {
+      dispatch(addTaskFailure(err.message));
+    });
 };
 
-export const toggleTaskAction = (id) => ({
-  type: TOGGLE_TASK,
+export const toggleTaskSuccess = (id) => ({
+  type: TOGGLE_TASK_SUCCESS,
   payload: id,
 });
 
+export const toggleTaskFailure = (error) => ({
+  type: TOGGLE_TASK_FAILURE,
+  payload: {
+    error,
+  },
+});
+
+export const toggleTaskAction = (id, state) => (dispatch) => {
+  axios
+    .patch(`http://localhost:3004/tasks/${id}`, {
+      done: !state,
+    })
+    .then(() => {
+      dispatch(toggleTaskSuccess(id));
+    })
+    .catch((err) => {
+      dispatch(toggleTaskFailure(err.message));
+    });
+};
+
 export const toggleListItemAction = (taskId, itemId) => ({
-  type: TOGGLE_LIST_ITEM,
+  // type: TOGGLE_LIST_ITEM_SUCCESS,
   payload: {
     taskId,
     itemId,
   },
 });
 
-export const likeTaskAction = (id) => ({
-  type: LIKE_TASK,
+export const likeTaskSuccess = (id) => ({
+  type: LIKE_TASK_SUCCESS,
   payload: id,
 });
+
+export const likeTaskFailure = (error) => ({
+  type: LIKE_TASK_FAILURE,
+  payload: {
+    error,
+  },
+});
+
+export const likeTaskAction = (id, state) => (dispatch) => {
+  axios
+    .patch(`http://localhost:3004/tasks/${id}`, {
+      liked: !state,
+    })
+    .then(() => {
+      dispatch(likeTaskSuccess(id));
+    })
+    .catch((err) => {
+      dispatch(likeTaskFailure(err.message));
+    });
+};

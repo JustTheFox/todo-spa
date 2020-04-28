@@ -19,14 +19,19 @@ const TaskForm = () => {
     liked: false,
   };
 
-  const initialStateListItem = {
+  const initialStateSubList = {
+    taskId: null,
+    list: [],
+  };
+
+  const initialStateSubItem = {
     id: null,
     title: '',
     done: false,
   };
 
   const [task, setTask] = useState(initialStateTask);
-  const [listItem, setListItem] = useState(initialStateListItem);
+  const [listItem, setListItem] = useState(initialStateSubItem);
   const [list, setList] = useState([]);
   const [addComment, setAddComment] = useState(false);
   const [addList, setAddList] = useState(false);
@@ -73,7 +78,7 @@ const TaskForm = () => {
       setList((prevState) => {
         return [...prevState, listItem];
       });
-      setListItem(initialStateListItem);
+      setListItem(initialStateSubItem);
     }
   };
 

@@ -33,11 +33,11 @@ const TaskItem = ({
     dispatch(deleteTaskAction(id));
   }, [dispatch, id]);
   const onToggle = useCallback(() => {
-    dispatch(toggleTaskAction(id));
-  }, [dispatch, id]);
+    dispatch(toggleTaskAction(id, done));
+  }, [dispatch, id, done]);
   const onLike = useCallback(() => {
-    dispatch(likeTaskAction(id));
-  }, [dispatch, id]);
+    dispatch(likeTaskAction(id, liked));
+  }, [dispatch, id, liked]);
 
   const doneStyle = done ? 'success' : 'primary';
   const likeStyle = liked ? 'danger' : 'primary';

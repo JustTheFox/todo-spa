@@ -8,9 +8,15 @@ import {
   DELETE_TASK_STARTED,
   DELETE_TASK_SUCCESS,
   DELETE_TASK_FAILURE,
-  TOGGLE_TASK,
-  LIKE_TASK,
-  TOGGLE_LIST_ITEM,
+  TOGGLE_TASK_STARTED,
+  TOGGLE_TASK_SUCCESS,
+  TOGGLE_TASK_FAILURE,
+  TOGGLE_LIST_ITEM_STARTED,
+  TOGGLE_LIST_ITEM_SUCCESS,
+  TOGGLE_LIST_ITEM_FAILURE,
+  LIKE_TASK_STARTED,
+  LIKE_TASK_SUCCESS,
+  LIKE_TASK_FAILURE,
 } from '../const';
 
 const initialState = {
@@ -130,11 +136,21 @@ export default (state = initialState, { type, payload }) => {
         loading: false,
         error: payload,
       };
-    case TOGGLE_TASK:
+    case TOGGLE_TASK_SUCCESS:
       return toggleTask(state, payload);
-    case LIKE_TASK:
+    case TOGGLE_TASK_FAILURE:
+      return {
+        ...state,
+        error: payload,
+      };
+    case LIKE_TASK_SUCCESS:
       return likeTask(state, payload);
-    case TOGGLE_LIST_ITEM:
+    case LIKE_TASK_FAILURE:
+      return {
+        ...state,
+        error: payload,
+      };
+    case TOGGLE_LIST_ITEM_SUCCESS:
       return toggleListItem(state, payload);
     default:
       return state;
