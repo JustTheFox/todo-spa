@@ -1,32 +1,23 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import cn from 'classnames';
+import { parseDate } from '../../services/utils';
 import Button from '../button/button';
 import {
   deleteTaskAction,
   likeTaskAction,
   toggleTaskAction,
 } from '../../store/actions/tasks';
-import { parseDate } from '../../services/utils';
-import './task-item.scss';
+
 import {
   IconCheck,
   IconCheckAll,
   IconFavorite,
   IconTrash,
 } from '../icons/icons';
-import TaskSubList from '../task-sub-list/task-sub-list';
-import TaskSubItem from '../task-sub-item/task-sub-item';
+import './task-item.scss';
 
-const TaskItem = ({
-  id,
-  title,
-  description,
-  list = [],
-  timestamp,
-  done,
-  liked,
-}) => {
+const TaskItem = ({ id, title, description, timestamp, done, liked }) => {
   const dispatch = useDispatch();
 
   const onDelete = useCallback(() => {
@@ -54,20 +45,6 @@ const TaskItem = ({
         {title}
       </h2>
       {description && <p className="task-item__description">{description}</p>}
-      {list.length > 0 && (
-        <TaskSubList>
-          {list.map(({ id: itemId, title: itemTitle, done: itemDone }) => (
-            <TaskSubItem
-              key={itemId}
-              taskId={id}
-              itemId={itemId}
-              itemTitle={itemTitle}
-              itemDone={itemDone}
-              className="task-item__list-item"
-            />
-          ))}
-        </TaskSubList>
-      )}
       <div className="task-item__footer">
         {date && time && (
           <span className="task-item__date">{`${date} ${time}`}</span>

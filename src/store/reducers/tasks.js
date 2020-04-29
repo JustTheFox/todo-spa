@@ -11,9 +11,6 @@ import {
   TOGGLE_TASK_STARTED,
   TOGGLE_TASK_SUCCESS,
   TOGGLE_TASK_FAILURE,
-  TOGGLE_LIST_ITEM_STARTED,
-  TOGGLE_LIST_ITEM_SUCCESS,
-  TOGGLE_LIST_ITEM_FAILURE,
   LIKE_TASK_STARTED,
   LIKE_TASK_SUCCESS,
   LIKE_TASK_FAILURE,
@@ -38,35 +35,6 @@ const toggleTask = (state, payload) => ({
     return task;
   }),
 });
-
-const toggleListItem = (state, { taskId, itemId }) => {
-  const [{ list }] = state.taskList.filter(({ id }) => id === taskId);
-
-  const copyList = list.map((item) => {
-    const { id, done } = item;
-    if (id === itemId) {
-      return {
-        ...item,
-        done: !done,
-      };
-    }
-    return item;
-  });
-
-  return {
-    ...state,
-    taskList: state.taskList.map((task) => {
-      const { id } = task;
-      if (id === taskId) {
-        return {
-          ...task,
-          list: copyList,
-        };
-      }
-      return task;
-    }),
-  };
-};
 
 const likeTask = (state, payload) => ({
   ...state,
@@ -136,6 +104,7 @@ export default (state = initialState, { type, payload }) => {
         loading: false,
         error: payload,
       };
+    case TOGGLE_TASK_STARTED:
     case TOGGLE_TASK_SUCCESS:
       return toggleTask(state, payload);
     case TOGGLE_TASK_FAILURE:
@@ -143,6 +112,7 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         error: payload,
       };
+    case LIKE_TASK_STARTED:
     case LIKE_TASK_SUCCESS:
       return likeTask(state, payload);
     case LIKE_TASK_FAILURE:
@@ -150,8 +120,6 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         error: payload,
       };
-    case TOGGLE_LIST_ITEM_SUCCESS:
-      return toggleListItem(state, payload);
     default:
       return state;
   }
