@@ -13,6 +13,9 @@ import {
   TOGGLE_TASK_FAILURE,
   LIKE_TASK_SUCCESS,
   LIKE_TASK_FAILURE,
+  SET_COLOR_STARTED,
+  SET_COLOR_SUCCESS,
+  SET_COLOR_FAILURE,
 } from '../const';
 
 export const fetchTasksStart = () => {
@@ -154,5 +157,33 @@ export const likeTaskAction = (id, state) => (dispatch) => {
     })
     .catch((err) => {
       dispatch(likeTaskFailure(err.message));
+    });
+};
+
+export const setColorSuccess = (id, color) => ({
+  type: SET_COLOR_SUCCESS,
+  payload: {
+    id,
+    color,
+  },
+});
+
+export const setColorFailure = (error) => ({
+  type: SET_COLOR_FAILURE,
+  payload: {
+    error,
+  },
+});
+
+export const setColorAction = (id, color) => (dispatch) => {
+  axios
+    .patch(`http://localhost:3004/tasks/${id}`, {
+      color,
+    })
+    .then(() => {
+      dispatch(setColorSuccess(id, color));
+    })
+    .catch((err) => {
+      dispatch(setColorFailure(err.message));
     });
 };

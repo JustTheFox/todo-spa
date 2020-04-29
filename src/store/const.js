@@ -27,3 +27,25 @@ export const FILTERS = {
 };
 
 export const SET_SEARCH_VALUE = 'SET_SEARCH_VALUE';
+
+export const SET_COLOR_STARTED = 'SET_COLOR_STARTED';
+export const SET_COLOR_SUCCESS = 'SET_COLOR_SUCCESS';
+export const SET_COLOR_FAILURE = 'SET_COLOR_FAILURE';
+
+export const COLOR = {
+  TRANSPARENT: 'transparent',
+  RED: '#f4433650',
+  PINK: '#e91e6350',
+  PURPLE: '#9c27b050',
+  DEEP_PURPLE: '#673ab750',
+  BLUE: '#2196f350',
+  LIGHT_BLUE: '#00bcd450',
+  CYAN: '#00968850',
+  GREEN: '#4caf5050',
+  LIGHT_GREEN: '#8bc34a50',
+  YELLOW: '#ffeb3b50',
+  AMBER: '#ffc10750',
+  ORANGE: '#ff980050',
+  DEEP_ORANGE: '#ff572250',
+  GRAY: '#9e9e9e50',
+};

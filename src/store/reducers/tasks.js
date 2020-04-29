@@ -14,6 +14,9 @@ import {
   LIKE_TASK_STARTED,
   LIKE_TASK_SUCCESS,
   LIKE_TASK_FAILURE,
+  SET_COLOR_STARTED,
+  SET_COLOR_SUCCESS,
+  SET_COLOR_FAILURE,
 } from '../const';
 
 const initialState = {
@@ -44,6 +47,20 @@ const likeTask = (state, payload) => ({
       return {
         ...task,
         liked: !liked,
+      };
+    }
+    return task;
+  }),
+});
+
+const setColor = (state, { taskId, color }) => ({
+  ...state,
+  taskList: state.taskList.map((task) => {
+    const { id } = task;
+    if (id === taskId) {
+      return {
+        ...task,
+        color,
       };
     }
     return task;
@@ -116,6 +133,14 @@ export default (state = initialState, { type, payload }) => {
     case LIKE_TASK_SUCCESS:
       return likeTask(state, payload);
     case LIKE_TASK_FAILURE:
+      return {
+        ...state,
+        error: payload,
+      };
+    case SET_COLOR_STARTED:
+    case SET_COLOR_SUCCESS:
+      return setColor(state, payload);
+    case SET_COLOR_FAILURE:
       return {
         ...state,
         error: payload,

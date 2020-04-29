@@ -21,7 +21,7 @@
       "title": "Тестовая таска",
       "description": "Проверяем комментарий",
       "timestamp": 1588017007310,
-      "done": false,
+      "done": true,
       "liked": false
     },
     {
@@ -30,7 +30,7 @@
       "description": "",
       "timestamp": 1588182798532,
       "done": false,
-      "liked": false
+      "liked": true
     }
   ]
 }

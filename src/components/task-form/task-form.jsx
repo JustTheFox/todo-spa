@@ -12,7 +12,7 @@ const TaskForm = () => {
     id: null,
     title: '',
     description: '',
-    list: [],
+    color: '',
     timestamp: null,
     done: false,
     liked: false,
