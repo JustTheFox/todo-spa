@@ -21,12 +21,11 @@ export const Modal = ({ show, children, title, onClose }) => {
   return (
     <ModalPortal>
       <div className="modal d-block">
-        <div className="modal-dialog" onClick={onClose}>
+        <div className="modal-overlay" onClick={onClose} />
+        <div className="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">
-                {title}
-              </h5>
+              <h5 class="modal-title">{title}</h5>
               <button
                 type="button"
                 class="close"
