@@ -1,8 +1,9 @@
 import React from 'react';
-import Header from '../header/header';
-import Content from '../content/content';
+import { Header } from '../header/header';
+import { Content } from '../content/content';
+import './page.scss';
 
-const Page = ({ children }) => {
+export const Page = ({ children }) => {
   return (
     <>
       <Header />
@@ -10,5 +11,3 @@ const Page = ({ children }) => {
     </>
   );
 };
-
-export default Page;

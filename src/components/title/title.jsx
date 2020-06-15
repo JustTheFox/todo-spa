@@ -1,12 +1,8 @@
 import React from 'react';
-import bem from 'config/bem';
 import './title.scss';
 
-const Title = ({ tagName, children }) => {
-  const cl = bem('title');
+export const Title = ({ tagName, children }) => {
   const Tag = tagName || 'h1';
 
   return <Tag className={cl()}>{children}</Tag>;
 };
-
-export default Title;

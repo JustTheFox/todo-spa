@@ -1,0 +1,75 @@
+{
+  "board": [
+    {
+      "id": 1,
+      "title": "Board 1",
+      "colorId": 5
+    },
+    {
+      "id": 2,
+      "title": "Board 2",
+      "colorId": 8
+    }
+  ],
+  "list": [
+    {
+      "boardId": 1,
+      "id": 1,
+      "title": "List 1",
+      "timestamp": 1587228097274
+    },
+    {
+      "boardId": 2,
+      "id": 2,
+      "title": "List 2",
+      "timestamp": 1587228097274
+    }
+  ],
+  "tasks": [
+    {
+      "listId": 1,
+      "id": 1,
+      "title": "Create App",
+      "done": false
+    },
+    {
+      "listId": 1,
+      "id": 2,
+      "title": "Что нужно сделать",
+      "done": false
+    },
+    {
+      "listId": 2,
+      "id": 3,
+      "title": "Тестовая таска",
+      "done": false
+    },
+    {
+      "listId": 2,
+      "id": 4,
+      "title": "123",
+      "done": false
+    }
+  ],
+  "colors": [
+    {
+      "id": 1,
+      "hex": "transparent",
+      "name": "transparent"
+    },
+    { "id": 2, "hex": "#f4433650", "name": "red" },
+    { "id": 3, "hex": "#e91e6350", "name": "pink" },
+    { "id": 4, "hex": "#9c27b050", "name": "purple" },
+    { "id": 5, "hex": "#673ab750", "name": "deep-purple" },
+    { "id": 6, "hex": "#2196f350", "name": "blue" },
+    { "id": 7, "hex": "#00bcd450", "name": "light-blue" },
+    { "id": 8, "hex": "#00968850", "name": "cyan" },
+    { "id": 9, "hex": "#4caf5050", "name": "green" },
+    { "id": 10, "hex": "#8bc34a50", "name": "light-green" },
+    { "id": 11, "hex": "#ffeb3b50", "name": "yellow" },
+    { "id": 12, "hex": "#ffc10750", "name": "amber" },
+    { "id": 13, "hex": "#ff980050", "name": "orange" },
+    { "id": 14, "hex": "#ff572250", "name": "deep-orange" },
+    { "id": 15, "hex": "#9e9e9e50", "name": "gray" }
+  ]
+}

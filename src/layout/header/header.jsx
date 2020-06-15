@@ -6,7 +6,7 @@ import { IconMoon, IconSun } from '../../components/icons/icons';
 import { useTheme } from '../../context/theme-context';
 import './header.scss';
 
-const Header = () => {
+export const Header = () => {
   const { THEMES, theme, onSetTheme } = useTheme();
 
   useEffect(() => {
@@ -36,5 +36,3 @@ const Header = () => {
     </header>
   );
 };
-
-export default Header;

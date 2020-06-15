@@ -1,14 +1,14 @@
 import React from 'react';
 import { useSelector, shallowEqual } from 'react-redux';
 import { createFilter } from 'react-search-input';
-import Page from '../../layout/page/page';
+import { Page } from '../../layout/page';
 import TaskForm from '../../components/task-form/task-form';
 import FilterList from '../../components/filter/filter-list';
 import TaskList from '../../components/task-list/task-list';
 import TaskItem from '../../components/task-item/task-item';
 import { getFilteredTasks } from '../../store/selectors';
 
-const MainPage = () => {
+export const MainPage = () => {
   const search = useSelector((store) => store.search);
   const filter = useSelector((store) => store.filter) || [];
   const tasks =
@@ -30,11 +30,9 @@ const MainPage = () => {
 
   return (
     <Page>
-      <TaskForm />
-      <FilterList />
-      {renderTaskList()}
+      {/* <TaskForm /> */}
+      {/* <FilterList /> */}
+      {/* {renderTaskList()} */}
     </Page>
   );
 };
-
-export default MainPage;
