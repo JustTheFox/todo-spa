@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Icon from './icon-wrapper';
 
 export const IconSun = (props) => (
@@ -249,7 +249,7 @@ export const IconCard = (props) => (
     fill="currentColor"
     {...props}
   >
-<path
+    <path
       fill-rule="evenodd"
       d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"
     />

@@ -28,12 +28,12 @@ export const MainPage = () => {
     .filter(createFilter(search, ['title', 'description']))
     .map(({ id, ...props }) => <TaskItem key={id} id={id} {...props} />);
 
-  const renderTaskList = () =>
-    filteredList.length === 0 ? (
-      <p>Задачи не найдены</p>
-    ) : (
-      <TaskList>{filteredList}</TaskList>
-    );
+  // const renderTaskList = () =>
+  //   filteredList.length === 0 ? (
+  //     <p>Задачи не найдены</p>
+  //   ) : (
+  //     <TaskList>{filteredList}</TaskList>
+  //   );
 
   return (
     <Page>

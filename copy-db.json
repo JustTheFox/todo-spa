@@ -1,52 +1,54 @@
 {
-  "categories": [
+  "board": [
     {
       "id": 1,
-      "title": "Разработка",
+      "title": "Board 1",
       "colorId": 5
     },
     {
       "id": 2,
-      "title": "Прочее",
+      "title": "Board 2",
       "colorId": 8
+    }
+  ],
+  "list": [
+    {
+      "boardId": 1,
+      "id": 1,
+      "title": "List 1",
+      "timestamp": 1587228097274
+    },
+    {
+      "boardId": 2,
+      "id": 2,
+      "title": "List 2",
+      "timestamp": 1587228097274
     }
   ],
   "tasks": [
     {
-      "categoryId": 1,
+      "listId": 1,
       "id": 1,
       "title": "Create App",
-      "description": "Создаем первое SPA :)",
-      "timestamp": 1587228097274,
-      "done": false,
-      "liked": false
+      "done": false
     },
     {
-      "categoryId": 1,
+      "listId": 1,
       "id": 2,
       "title": "Что нужно сделать",
-      "description": "Сolor picker",
-      "timestamp": 1587228097274,
-      "done": false,
-      "liked": true
+      "done": false
     },
     {
-      "categoryId": 2,
+      "listId": 2,
       "id": 3,
       "title": "Тестовая таска",
-      "description": "Проверяем комментарий",
-      "timestamp": 1588017007310,
-      "done": false,
-      "liked": false
+      "done": false
     },
     {
-      "categoryId": 2,
+      "listId": 2,
       "id": 4,
       "title": "123",
-      "description": "",
-      "timestamp": 1588182798532,
-      "done": false,
-      "liked": false
+      "done": false
     }
   ],
   "colors": [

@@ -29,6 +29,10 @@
   --theme-ui-colors-icon: #959da5;
 }
 
+html {
+  min-height: 100%;
+}
+
 body {
   margin: 0;
   background: var(--theme-ui-colors-muted);
@@ -36,6 +40,7 @@ body {
   font-family: $font;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
 }
 
 code {

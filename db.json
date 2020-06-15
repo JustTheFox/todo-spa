@@ -25,7 +25,7 @@
       "timestamp": 1587228097274
     }
   ],
-  "tasks": [
+  "task": [
     {
       "listId": 1,
       "id": 1,
@@ -51,7 +51,7 @@
       "done": false
     }
   ],
-  "colors": [
+  "color": [
     {
       "id": 1,
       "hex": "transparent",

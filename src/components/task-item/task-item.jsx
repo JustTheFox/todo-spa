@@ -5,12 +5,7 @@ import { parseDate } from '../../services/utils';
 import Button from '../button/button';
 import { deleteTaskAction, toggleTaskAction } from '../../store/actions/tasks';
 
-import {
-  IconCheck,
-  IconCheckAll,
-  IconFavorite,
-  IconTrash,
-} from '../icons/icons';
+import { IconCheck, IconCheckAll, IconTrash } from '../icons/icons';
 import './task-item.scss';
 
 const TaskItem = ({ id, title, description, timestamp, done }) => {

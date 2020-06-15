@@ -1,39 +1,75 @@
-import { ADD_TASK, DELETE_TASK, TOGGLE_TASK } from '../const';
+import {
+  FETCH_BOARDS_STARTED,
+  FETCH_BOARDS_SUCCESS,
+  FETCH_BOARDS_FAILURE,
+  ADD_BOARD_STARTED,
+  ADD_BOARD_SUCCESS,
+  ADD_BOARD_FAILURE,
+  DELETE_BOARD_STARTED,
+  DELETE_BOARD_SUCCESS,
+  DELETE_BOARD_FAILURE,
+} from '../const';
 
-const initialState = [
-  {
-    id: 1,
-    title: 'Create App',
-    done: false,
-  },
-  {
-    id: 2,
-    title: 'Что нужно сделать',
-    done: false,
-  },
-];
-
-const toggleTask = (state, payload) => {
-  return state.map((task) => {
-    const { id, done } = task;
-    if (id === payload) {
-      return {
-        ...task,
-        done: !done,
-      };
-    }
-    return task;
-  });
+const initialState = {
+  boards: [],
+  loading: false,
+  error: null,
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case ADD_TASK:
-      return [payload, ...state];
-    case DELETE_TASK:
-      return state.filter(({ id }) => id !== payload);
-    case TOGGLE_TASK:
-      return toggleTask(state, payload);
+    case FETCH_BOARDS_STARTED:
+      return {
+        ...state,
+        loading: true,
+      };
+    case FETCH_BOARDS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        boards: [...payload],
+      };
+    case FETCH_BOARDS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: payload,
+      };
+    case ADD_BOARD_STARTED:
+      return {
+        ...state,
+        loading: true,
+      };
+    case ADD_BOARD_SUCCESS:
+      return {
+        ...state,
+        boards: [payload, ...state.boards],
+        loading: false,
+      };
+    case ADD_BOARD_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: payload,
+      };
+    case DELETE_BOARD_STARTED:
+      return {
+        ...state,
+        loading: true,
+      };
+    case DELETE_BOARD_SUCCESS:
+      return {
+        ...state,
+        boards: state.boards.filter(({ id }) => id !== payload),
+        loading: false,
+        error: '',
+      };
+    case DELETE_BOARD_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: payload,
+      };
     default:
       return state;
   }
