@@ -1,19 +1,26 @@
-import React from 'react';
-import { useSelector, shallowEqual } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { createFilter } from 'react-search-input';
 import { Page } from '../../layout/page';
-import TaskForm from '../../components/task-form/task-form';
-import FilterList from '../../components/filter/filter-list';
 import TaskList from '../../components/task-list/task-list';
 import TaskItem from '../../components/task-item/task-item';
 import { getFilteredTasks } from '../../store/selectors';
+import { fetchTasks } from '../../store/actions/tasks';
 
 export const MainPage = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTasks());
+    // eslint-disable-next-line
+  }, []);
+
+  const loading = useSelector((store) => store.tasks.loading);
   const search = useSelector((store) => store.search);
   const filter = useSelector((store) => store.filter) || [];
   const tasks =
     useSelector(
-      (store) => getFilteredTasks(store.tasks, filter),
+      (store) => getFilteredTasks(store.tasks.taskList, filter),
       shallowEqual,
     ) || [];
 
@@ -30,9 +37,10 @@ export const MainPage = () => {
 
   return (
     <Page>
-      {/* <TaskForm /> */}
-      {/* <FilterList /> */}
-      {/* {renderTaskList()} */}
+      {/* <TaskForm />
+      <FilterList /> */}
+      {loading && <p>Загрузка...</p>}
+      {/* {!loading && renderTaskList()} */}
     </Page>
   );
 };

@@ -1,13 +1,11 @@
 // import axios from 'axios';
 //
+// export default axios.create({
+//   baseURL: 'https://localhost:3004/',
+// });
+
 // const API_KEY = '';
-// // const config = {};
 //
-// // const instance = axios.create({
-// //   baseURL: 'https://some-domain.com/api/',
-// //   timeout: 1000,
-// //   headers: { 'X-Custom-page': 'foobar' },
-// // });
 //
 // axios
 //   .get('https://api.thecatapi.com/v1/images/search')

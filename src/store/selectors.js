@@ -14,3 +14,6 @@ export const getFilteredTasks = (tasks, filter) => {
       throw new Error(`Unknown filter: ${filter}`);
   }
 };
+
+export const getSublistByTaskId = (sublist) => (taskId) =>
+  sublist.filter((subitem) => subitem.taskId === taskId);
