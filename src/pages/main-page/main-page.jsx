@@ -1,46 +1,68 @@
-import React, { useEffect } from 'react';
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
-import { createFilter } from 'react-search-input';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { addBoardAction, deleteBoardAction } from '../../store/actions/boards';
 import { Page } from '../../layout/page';
-import TaskList from '../../components/task-list/task-list';
-import TaskItem from '../../components/task-item/task-item';
-import { getFilteredTasks } from '../../store/selectors';
-import { fetchTasks } from '../../store/actions/tasks';
+import { Title } from '../../components/title';
+import { fetchBoards } from '../../store/actions/boards';
+import { AddBoardModal } from '../../components/modal/add-board-modal';
+import { Button } from '../../components/button';
 
 export const MainPage = () => {
+  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchTasks());
-    // eslint-disable-next-line
+    dispatch(fetchBoards());
   }, []);
 
-  const loading = useSelector((store) => store.tasks.loading);
-  const search = useSelector((store) => store.search);
-  const filter = useSelector((store) => store.filter) || [];
-  const tasks =
-    useSelector(
-      (store) => getFilteredTasks(store.tasks.taskList, filter),
-      shallowEqual,
-    ) || [];
+  const addBoard = useCallback(
+    (item) => {
+      dispatch(addBoardAction(item));
+    },
+    [dispatch],
+  );
 
-  const filteredList = tasks
-    .filter(createFilter(search, ['title', 'description']))
-    .map(({ id, ...props }) => <TaskItem key={id} id={id} {...props} />);
+  const deleteBoard = useCallback(
+    (id) => {
+      dispatch(deleteBoardAction(id));
+    },
+    [dispatch],
+  );
 
-  // const renderTaskList = () =>
-  //   filteredList.length === 0 ? (
-  //     <p>Задачи не найдены</p>
-  //   ) : (
-  //     <TaskList>{filteredList}</TaskList>
-  //   );
+  const loading = useSelector((store) => store.boards.loading);
+  const boards = useSelector((store) => store.boards.items) || [];
+
+  const handleOpenModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
+  const hanleOkModal = (data) => {
+    addBoard(data);
+  };
 
   return (
     <Page>
-      {/* <TaskForm />
-      <FilterList /> */}
-      {loading && <p>Загрузка...</p>}
-      {/* {!loading && renderTaskList()} */}
+      <Title>Boards</Title>
+      {loading && <p>loading...</p>}
+      <ul>
+        {boards.map(({ id, title }) => (
+          <li key={id}>
+            <Link to={`boards/${id}`}>{title}</Link>
+            <Button
+              type="button"
+              onClick={() => deleteBoard(id)}
+              className="ml-2"
+            >
+              Delete
+            </Button>
+          </li>
+        ))}
+      </ul>
+      <Button type="button" onClick={handleOpenModal}>
+        Add board
+      </Button>
+      {showModal && (
+        <AddBoardModal onOk={hanleOkModal} onClose={handleCloseModal} />
+      )}
     </Page>
   );
 };

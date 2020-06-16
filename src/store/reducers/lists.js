@@ -1,13 +1,13 @@
 import {
-  FETCH_BOARDS_STARTED,
-  FETCH_BOARDS_SUCCESS,
-  FETCH_BOARDS_FAILURE,
-  ADD_BOARD_STARTED,
-  ADD_BOARD_SUCCESS,
-  ADD_BOARD_FAILURE,
-  DELETE_BOARD_STARTED,
-  DELETE_BOARD_SUCCESS,
-  DELETE_BOARD_FAILURE,
+  FETCH_LISTS_STARTED,
+  FETCH_LISTS_SUCCESS,
+  FETCH_LISTS_FAILURE,
+  ADD_LIST_STARTED,
+  ADD_LIST_SUCCESS,
+  ADD_LIST_FAILURE,
+  DELETE_LIST_STARTED,
+  DELETE_LIST_SUCCESS,
+  DELETE_LIST_FAILURE,
 } from '../const';
 
 const initialState = {
@@ -18,53 +18,53 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case FETCH_BOARDS_STARTED:
+    case FETCH_LISTS_STARTED:
       return {
         ...state,
         loading: true,
       };
-    case FETCH_BOARDS_SUCCESS:
+    case FETCH_LISTS_SUCCESS:
       return {
         ...state,
         loading: false,
         items: [...payload],
       };
-    case FETCH_BOARDS_FAILURE:
+    case FETCH_LISTS_FAILURE:
       return {
         ...state,
         loading: false,
         error: payload,
       };
-    case ADD_BOARD_STARTED:
+    case ADD_LIST_STARTED:
       return {
         ...state,
         loading: true,
       };
-    case ADD_BOARD_SUCCESS:
+    case ADD_LIST_SUCCESS:
       return {
         ...state,
         items: [payload, ...state.items],
         loading: false,
       };
-    case ADD_BOARD_FAILURE:
+    case ADD_LIST_FAILURE:
       return {
         ...state,
         loading: false,
         error: payload,
       };
-    case DELETE_BOARD_STARTED:
+    case DELETE_LIST_STARTED:
       return {
         ...state,
         loading: true,
       };
-    case DELETE_BOARD_SUCCESS:
+    case DELETE_LIST_SUCCESS:
       return {
         ...state,
         items: state.items.filter(({ id }) => id !== payload),
         loading: false,
         error: '',
       };
-    case DELETE_BOARD_FAILURE:
+    case DELETE_LIST_FAILURE:
       return {
         ...state,
         loading: false,

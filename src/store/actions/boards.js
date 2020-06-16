@@ -34,7 +34,7 @@ export const fetchBoardsFailure = (error) => {
 export const fetchBoards = () => (dispatch) => {
   dispatch(fetchBoardsStart());
   axios
-    .get('http://localhost:3004/board?_sort=id&_order=desc')
+    .get('http://localhost:3004/boards?_expand=color&_sort=id&_order=asc')
     .then((res) => {
       dispatch(fetchBoardsSuccess(res.data));
     })
@@ -60,9 +60,9 @@ export const addBoardFailure = (error) => ({
 export const addBoardAction = (board) => (dispatch) => {
   dispatch(addBoardStart());
   axios
-    .post('http://localhost:3004/board', board)
-    .then(() => {
-      dispatch(addBoardSuccess(board));
+    .post('http://localhost:3004/boards', board)
+    .then(({ data }) => {
+      dispatch(addBoardSuccess(data));
     })
     .catch((err) => {
       dispatch(addBoardFailure(err.message));
@@ -92,7 +92,7 @@ export const deleteBoardsFailure = (error) => {
 export const deleteBoardAction = (id) => (dispatch) => {
   dispatch(deleteBoardsStart());
   axios
-    .delete(`http://localhost:3004/board/${id}`)
+    .delete(`http://localhost:3004/boards/${id}`)
     .then(() => {
       dispatch(deleteBoardsSuccess(id));
     })

@@ -1,12 +1,12 @@
 import React from 'react';
+import cn from 'classnames';
 import './field.scss';
 
-// eslint-disable-next-line import/prefer-default-export
-export const Input = ({ onChange, ...props }) => {
+export const Input = ({ className, onChange, ...props }) => {
   return (
     <div className="field">
       <input
-        className="form-control field__input"
+        className={cn('form-control', 'field__input', className)}
         onChange={onChange}
         {...props}
       />

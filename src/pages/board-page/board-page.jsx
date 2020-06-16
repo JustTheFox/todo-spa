@@ -1,38 +1,78 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import {
+  fetchLists,
+  addListAction,
+  deleteListAction,
+} from '../../store/actions/lists';
 import { Page } from '../../layout/page';
 import { Title } from '../../components/title';
-import { fetchBoards } from '../../store/actions/boards';
-import { AddBoardModal } from '../../components/modal/add-board-modal';
+// import { AddBoardModal } from '../../components/modal/add-board-modal';
+import { Button } from '../../components/button';
 
 export const BoardPage = () => {
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
+  const { boardId } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchBoards());
-    // eslint-disable-next-line
+    dispatch(fetchLists(boardId));
   }, []);
 
-  const loading = useSelector((store) => store.boards.loading);
-  const boards = useSelector((store) => store.boards.boards) || [];
+  // const addList = useCallback(
+  //   (item) => {
+  //     dispatch(addListAction(item));
+  //   },
+  //   [dispatch],
+  // );
+
+  const deleteList = useCallback(
+    (id) => {
+      dispatch(deleteListAction(id));
+    },
+    [dispatch],
+  );
+
+  const loading = useSelector((store) => store.lists.loading);
+  const lists = useSelector((store) => store.lists.items) || [];
+
+  // const handleOpenModal = () => setShowModal(true);
+  // const handleCloseModal = () => setShowModal(false);
+
+  // const hanleOkModal = (data) => {
+  //   addList(data);
+  // };
 
   return (
     <Page>
-      <Title>Boards</Title>
+      <Title>Lists</Title>
       {loading && <p>loading...</p>}
       <ul>
-        {boards.map(({ id, title }) => (
+        {lists.map(({ id, title, tasks = [] }) => (
           <li key={id}>
-            <Link to={`board/${id}`}>{title}</Link>
+            {title}
+            <Button
+              type="button"
+              onClick={() => deleteList(id)}
+              className="ml-2"
+            >
+              Delete
+            </Button>
+            <ul>
+              {tasks.map(({ id: taskId, title: taskTitle }) => (
+                <li key={taskId}>{taskTitle}</li>
+              ))}
+            </ul>
           </li>
         ))}
       </ul>
-      <button type="button" onClick={() => setShowModal(true)}>
+      {/* <Button type="button" onClick={handleOpenModal}>
         Add board
-      </button>
-      {showModal && <AddBoardModal onClose={() => setShowModal(false)} />}
+      </Button> */}
+      {/* {showModal && (
+        <AddListModal onOk={hanleOkModal} onClose={handleCloseModal} />
+      )} */}
     </Page>
   );
 };

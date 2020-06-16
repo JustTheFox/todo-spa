@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import cn from 'classnames';
 import './button.scss';
 
-const Button = ({
+const ButtonComponent = ({
   type = 'submit',
   children,
   onClick,
@@ -37,4 +37,4 @@ const Button = ({
   );
 };
 
-export default memo(Button);
+export const Button = memo(ButtonComponent);
