@@ -3,9 +3,11 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   fetchListsAction,
-  addListAction,
+  createListAction,
   deleteListAction,
-  // deleteTaskAction,
+  createTaskAction,
+  // editTask,
+  deleteTaskAction,
 } from '../../store/actions/lists';
 import { Page } from '../../layout/page';
 import { Title } from '../../components/title';
@@ -15,6 +17,7 @@ export const BoardPage = () => {
   const [showCreateList, setShowCreateList] = useState(false);
   const [showCreateTask, setShowCreateTask] = useState(false);
   const [newList, setNewList] = useState('');
+  const [newTask, setNewTask] = useState('');
 
   const { boardId } = useParams();
   const dispatch = useDispatch();
@@ -27,9 +30,9 @@ export const BoardPage = () => {
     dispatch(fetchListsAction(boardId));
   }, [boardId]);
 
-  const addList = useCallback(
+  const createList = useCallback(
     (item) => {
-      dispatch(addListAction(item));
+      dispatch(createListAction(item));
     },
     [dispatch],
   );
@@ -54,14 +57,30 @@ export const BoardPage = () => {
   const handleCreateList = () => setShowCreateList(true);
   const handleCanselCreateList = () => setShowCreateList(false);
 
+  const handleCreateTask = () => setShowCreateTask(true);
+  const handleCanselCreateTask = () => setShowCreateTask(false);
+
   const handleListInput = ({ target }) => setNewList(target.value);
+  const handleTaskInput = ({ target }) => setNewTask(target.value);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!newList.trim()) return;
 
-    addList({
+    createList({
+      title: newList,
+      boardId,
+    });
+    handleCanselCreateList();
+  };
+
+  const handleSubmitTask = (e) => {
+    e.preventDefault();
+
+    if (!newList.trim()) return;
+
+    createList({
       title: newList,
       boardId,
     });
@@ -98,11 +117,28 @@ export const BoardPage = () => {
                 </li>
               ))}
             </ul>
+            <Button type="button" onClick={handleCreateTask}>
+              Add task
+            </Button>
+            {showCreateTask && (
+              <form onSubmit={handleSubmitTask}>
+                <input
+                  type="text"
+                  name="task"
+                  value={newTask}
+                  onChange={handleTaskInput}
+                />
+                <Button>Add</Button>
+                <Button type="button" onClick={handleCanselCreateTask}>
+                  Cancel
+                </Button>
+              </form>
+            )}
           </li>
         ))}
       </ul>
       <Button type="button" onClick={handleCreateList}>
-        Add board
+        Add list
       </Button>
       {showCreateList && (
         <form onSubmit={handleSubmit}>

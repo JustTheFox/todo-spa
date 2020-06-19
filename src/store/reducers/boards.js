@@ -2,9 +2,9 @@ import {
   FETCH_BOARDS_STARTED,
   FETCH_BOARDS_SUCCESS,
   FETCH_BOARDS_FAILURE,
-  ADD_BOARD_STARTED,
-  ADD_BOARD_SUCCESS,
-  ADD_BOARD_FAILURE,
+  CREATE_BOARD_STARTED,
+  CREATE_BOARD_SUCCESS,
+  CREATE_BOARD_FAILURE,
   DELETE_BOARD_STARTED,
   DELETE_BOARD_SUCCESS,
   DELETE_BOARD_FAILURE,
@@ -35,18 +35,18 @@ export default (state = initialState, { type, payload }) => {
         isFetching: false,
         error: payload,
       };
-    case ADD_BOARD_STARTED:
+    case CREATE_BOARD_STARTED:
       return {
         ...state,
         isFetching: true,
       };
-    case ADD_BOARD_SUCCESS:
+    case CREATE_BOARD_SUCCESS:
       return {
         ...state,
-        items: [payload, ...state.items],
+        items: [...state.items, payload],
         isFetching: false,
       };
-    case ADD_BOARD_FAILURE:
+    case CREATE_BOARD_FAILURE:
       return {
         ...state,
         isFetching: false,

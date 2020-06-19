@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'https://localhost:3004';
+const API_BASE_URL = 'http://localhost:3004';
 const DEFAULT_SORT = '_sort=id&_order=asc';
 
 const api = axios.create({

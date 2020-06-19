@@ -4,7 +4,7 @@ import Form from '../form/form';
 import { Input, Textarea } from '../field';
 import Button from '../button/button';
 import { IconText } from '../icons/icons';
-import { addTaskAction } from '../../store/actions/tasks';
+import { createTaskAction } from '../../store/actions/tasks';
 import './task-form.scss';
 
 const TaskForm = () => {
@@ -19,18 +19,18 @@ const TaskForm = () => {
   };
 
   const [task, setTask] = useState(initialStateTask);
-  const [addComment, setAddComment] = useState(false);
+  const [createComment, setAddComment] = useState(false);
   const dispatch = useDispatch();
 
-  const addTask = useCallback(
+  const createTask = useCallback(
     (item) => {
-      dispatch(addTaskAction(item));
+      dispatch(createTaskAction(item));
     },
     [dispatch],
   );
 
   const handleAddComment = () => {
-    setAddComment(!addComment);
+    setAddComment(!createComment);
     if (task.description !== '') {
       setTask({
         ...task,
@@ -50,7 +50,7 @@ const TaskForm = () => {
     e.preventDefault();
 
     if (task.title.trim()) {
-      addTask({
+      createTask({
         ...task,
         timestamp: Date.now(),
       });
@@ -69,7 +69,7 @@ const TaskForm = () => {
           onChange={onChange}
           maxLength={150}
         />
-        {addComment && (
+        {createComment && (
           <Textarea
             type="text"
             name="description"

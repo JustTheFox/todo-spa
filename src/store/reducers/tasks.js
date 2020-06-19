@@ -2,8 +2,8 @@ import {
   FETCH_TASKS_STARTED,
   FETCH_TASKS_SUCCESS,
   FETCH_TASKS_FAILURE,
-  ADD_TASK_SUCCESS,
-  ADD_TASK_FAILURE,
+  CREATE_TASK_SUCCESS,
+  CREATE_TASK_FAILURE,
   TOGGLE_TASK_SUCCESS,
   TOGGLE_TASK_FAILURE,
   DELETE_TASK_SUCCESS,
@@ -49,12 +49,12 @@ export default (state = initialState, { type, payload }) => {
         isFetching: false,
         errorMessage: payload,
       };
-    case ADD_TASK_SUCCESS:
+    case CREATE_TASK_SUCCESS:
       return {
         ...state,
         items: [payload, ...state.items],
       };
-    case ADD_TASK_FAILURE:
+    case CREATE_TASK_FAILURE:
       return {
         ...state,
         errorMessage: payload,

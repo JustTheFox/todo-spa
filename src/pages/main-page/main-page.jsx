@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { addBoardAction, deleteBoardAction } from '../../store/actions/boards';
+import {
+  createBoardAction,
+  deleteBoardAction,
+} from '../../store/actions/boards';
 import { Page } from '../../layout/page';
 import { Title } from '../../components/title';
 import { fetchBoards } from '../../store/actions/boards';
@@ -16,9 +19,9 @@ export const MainPage = () => {
     dispatch(fetchBoards());
   }, []);
 
-  const addBoard = useCallback(
+  const createBoard = useCallback(
     (item) => {
-      dispatch(addBoardAction(item));
+      dispatch(createBoardAction(item));
     },
     [dispatch],
   );
@@ -36,7 +39,7 @@ export const MainPage = () => {
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
   const hanleOkModal = (data) => {
-    addBoard(data);
+    createBoard(data);
   };
 
   return (

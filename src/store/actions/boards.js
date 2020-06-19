@@ -3,9 +3,9 @@ import {
   FETCH_BOARDS_STARTED,
   FETCH_BOARDS_SUCCESS,
   FETCH_BOARDS_FAILURE,
-  ADD_BOARD_STARTED,
-  ADD_BOARD_SUCCESS,
-  ADD_BOARD_FAILURE,
+  CREATE_BOARD_STARTED,
+  CREATE_BOARD_SUCCESS,
+  CREATE_BOARD_FAILURE,
   DELETE_BOARD_STARTED,
   DELETE_BOARD_SUCCESS,
   DELETE_BOARD_FAILURE,
@@ -43,29 +43,29 @@ export const fetchBoards = () => (dispatch) => {
     });
 };
 
-export const addBoardStart = () => ({
-  type: ADD_BOARD_STARTED,
+export const createBoardStart = () => ({
+  type: CREATE_BOARD_STARTED,
 });
 
-export const addBoardSuccess = (board) => ({
-  type: ADD_BOARD_SUCCESS,
+export const createBoardSuccess = (board) => ({
+  type: CREATE_BOARD_SUCCESS,
   payload: board,
 });
 
-export const addBoardFailure = (error) => ({
-  type: ADD_BOARD_FAILURE,
+export const createBoardFailure = (error) => ({
+  type: CREATE_BOARD_FAILURE,
   payload: error,
 });
 
-export const addBoardAction = (board) => (dispatch) => {
-  dispatch(addBoardStart());
+export const createBoardAction = (board) => (dispatch) => {
+  dispatch(createBoardStart());
   axios
     .post('http://localhost:3004/boards', board)
     .then(({ data }) => {
-      dispatch(addBoardSuccess(data));
+      dispatch(createBoardSuccess(data));
     })
     .catch(({ message }) => {
-      dispatch(addBoardFailure(message));
+      dispatch(createBoardFailure(message));
     });
 };
 

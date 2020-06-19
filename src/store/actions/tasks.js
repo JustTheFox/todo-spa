@@ -1,12 +1,12 @@
 import {
-  DELETE_TASK_SUCCESS,
-  DELETE_TASK_FAILURE,
-  ADD_TASK_SUCCESS,
-  ADD_TASK_FAILURE,
+  CREATE_TASK_SUCCESS,
+  CREATE_TASK_FAILURE,
   EDIT_TASK_SUCCESS,
   EDIT_TASK_FAILURE,
   TOGGLE_TASK_SUCCESS,
   TOGGLE_TASK_FAILURE,
+  DELETE_TASK_SUCCESS,
+  DELETE_TASK_FAILURE,
 } from '../const';
 
 import {
@@ -45,24 +45,24 @@ export const fetchTasksAction = () => (dispatch) => {
     });
 };
 
-export const addTaskSuccess = (task) => ({
-  type: ADD_TASK_SUCCESS,
+export const createTaskSuccess = (task) => ({
+  type: CREATE_TASK_SUCCESS,
   payload: task,
 });
 
-export const addTaskFailure = (error) => ({
-  type: ADD_TASK_FAILURE,
+export const createTaskFailure = (error) => ({
+  type: CREATE_TASK_FAILURE,
   payload: error,
 });
 
-export const addTaskAction = (task) => (dispatch) => {
-  dispatch(addTaskStart());
+export const createTaskAction = (task) => (dispatch) => {
+  dispatch(createTaskStart());
   createTask(task)
     .then(({ data }) => {
-      dispatch(addTaskSuccess(data));
+      dispatch(createTaskSuccess(data));
     })
     .catch(({ message }) => {
-      dispatch(addTaskFailure(message));
+      dispatch(createTaskFailure(message));
     });
 };
 
@@ -86,9 +86,12 @@ export const editTaskAction = (id, task) => (dispatch) => {
     });
 };
 
-export const toggleTaskSuccess = (id) => ({
+export const toggleTaskSuccess = (listId, taskId) => ({
   type: TOGGLE_TASK_SUCCESS,
-  payload: id,
+  payload: {
+    listId,
+    taskId,
+  },
 });
 
 export const toggleTaskFailure = (error) => ({
@@ -96,12 +99,12 @@ export const toggleTaskFailure = (error) => ({
   payload: error,
 });
 
-export const toggleTaskAction = (id, state) => (dispatch) => {
-  editTask(id, {
+export const toggleTaskAction = (listId, taskId, state) => (dispatch) => {
+  editTask(taskId, {
     done: !state,
   })
     .then(() => {
-      dispatch(toggleTaskSuccess(id));
+      dispatch(toggleTaskSuccess(listId, taskId));
     })
     .catch(({ message }) => {
       dispatch(toggleTaskFailure(message));
@@ -114,10 +117,13 @@ export const deleteTaskStart = () => {
   };
 };
 
-export const deleteTaskSuccess = (id) => {
+export const deleteTaskSuccess = (listId, taskId) => {
   return {
     type: DELETE_TASK_SUCCESS,
-    payload: id,
+    payload: {
+      listId,
+      taskId,
+    },
   };
 };
 
@@ -128,10 +134,10 @@ export const deleteTaskFailure = (error) => {
   };
 };
 
-export const deleteTaskAction = (id) => (dispatch) => {
+export const deleteTaskAction = (listId, taskId) => (dispatch) => {
   deleteTask(id)
     .then(() => {
-      dispatch(deleteTasksSuccess(id));
+      dispatch(deleteTaskSuccess(listId, taskId));
     })
     .catch(({ message }) => {
       dispatch(deleteTasksFailure(message));
