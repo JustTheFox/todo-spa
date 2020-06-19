@@ -8,7 +8,7 @@ export const Modal = ({ children, title, onClose }) => {
     (e) => {
       const { keyCode } = e;
       if (keyCode === 27) {
-        onClose();
+        onCloseCallback();
       }
       return;
     },

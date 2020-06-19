@@ -15,7 +15,7 @@ export const MainPage = () => {
     // eslint-disable-next-line
   }, []);
 
-  const loading = useSelector((store) => store.tasks.loading);
+  const isFetching = useSelector((store) => store.tasks.isFetching);
   const search = useSelector((store) => store.search);
   const filter = useSelector((store) => store.filter) || [];
   const tasks =
@@ -39,8 +39,8 @@ export const MainPage = () => {
     <Page>
       {/* <TaskForm />
       <FilterList /> */}
-      {loading && <p>Загрузка...</p>}
-      {/* {!loading && renderTaskList()} */}
+      {isFetching && <p>Загрузка...</p>}
+      {/* {!isFetching && renderTaskList()} */}
     </Page>
   );
 };

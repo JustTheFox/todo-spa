@@ -5,15 +5,30 @@ import {
   ADD_LIST_STARTED,
   ADD_LIST_SUCCESS,
   ADD_LIST_FAILURE,
+  EDIT_BOARD_STARTED,
+  EDIT_BOARD_SUCCESS,
+  EDIT_BOARD_FAILURE,
   DELETE_LIST_STARTED,
   DELETE_LIST_SUCCESS,
   DELETE_LIST_FAILURE,
+  ADD_TASK_STARTED,
+  ADD_TASK_SUCCESS,
+  ADD_TASK_FAILURE,
+  EDIT_TASK_STARTED,
+  EDIT_TASK_SUCCESS,
+  EDIT_TASK_FAILURE,
+  TOGGLE_TASK_STARTED,
+  TOGGLE_TASK_SUCCESS,
+  TOGGLE_TASK_FAILURE,
+  DELETE_TASK_STARTED,
+  DELETE_TASK_SUCCESS,
+  DELETE_TASK_FAILURE,
 } from '../const';
 
 const initialState = {
-  items: [],
-  loading: false,
-  error: null,
+  items: {},
+  isFetching: false,
+  errorMessage: null,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -21,54 +36,40 @@ export default (state = initialState, { type, payload }) => {
     case FETCH_LISTS_STARTED:
       return {
         ...state,
-        loading: true,
+        isFetching: true,
       };
     case FETCH_LISTS_SUCCESS:
       return {
         ...state,
-        loading: false,
-        items: [...payload],
+        ...payload,
+        isFetching: false,
       };
     case FETCH_LISTS_FAILURE:
       return {
         ...state,
-        loading: false,
-        error: payload,
-      };
-    case ADD_LIST_STARTED:
-      return {
-        ...state,
-        loading: true,
+        isFetching: false,
+        errorMessage: payload,
       };
     case ADD_LIST_SUCCESS:
       return {
         ...state,
-        items: [payload, ...state.items],
-        loading: false,
+        ...payload,
       };
     case ADD_LIST_FAILURE:
       return {
         ...state,
-        loading: false,
-        error: payload,
-      };
-    case DELETE_LIST_STARTED:
-      return {
-        ...state,
-        loading: true,
+        errorMessage: payload,
       };
     case DELETE_LIST_SUCCESS:
       return {
         ...state,
-        items: state.items.filter(({ id }) => id !== payload),
-        loading: false,
-        error: '',
+        lists: state.lists.filter(({ id }) => id !== payload),
+        errorMessage: '',
       };
     case DELETE_LIST_FAILURE:
       return {
         ...state,
-        loading: false,
-        error: payload,
+        errorMessage: payload,
       };
     default:
       return state;

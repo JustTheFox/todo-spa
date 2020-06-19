@@ -30,7 +30,7 @@ export const MainPage = () => {
     [dispatch],
   );
 
-  const loading = useSelector((store) => store.boards.loading);
+  const isFetching = useSelector((store) => store.boards.isFetching);
   const boards = useSelector((store) => store.boards.items) || [];
 
   const handleOpenModal = () => setShowModal(true);
@@ -42,7 +42,7 @@ export const MainPage = () => {
   return (
     <Page>
       <Title>Boards</Title>
-      {loading && <p>loading...</p>}
+      {isFetching && <p>isFetching...</p>}
       <ul>
         {boards.map(({ id, title }) => (
           <li key={id}>

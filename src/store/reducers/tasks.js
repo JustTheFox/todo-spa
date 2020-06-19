@@ -2,37 +2,23 @@ import {
   FETCH_TASKS_STARTED,
   FETCH_TASKS_SUCCESS,
   FETCH_TASKS_FAILURE,
-  ADD_TASK_STARTED,
   ADD_TASK_SUCCESS,
   ADD_TASK_FAILURE,
-  DELETE_TASK_STARTED,
-  DELETE_TASK_SUCCESS,
-  DELETE_TASK_FAILURE,
-  TOGGLE_TASK_STARTED,
   TOGGLE_TASK_SUCCESS,
   TOGGLE_TASK_FAILURE,
+  DELETE_TASK_SUCCESS,
+  DELETE_TASK_FAILURE,
 } from '../const';
 
 const initialState = {
-  tasks: [
-    {
-      id: 1,
-      title: 'Create App',
-      done: false,
-    },
-    {
-      id: 2,
-      title: 'Что нужно сделать',
-      done: false,
-    },
-  ],
-  loading: false,
-  error: null,
+  items: [],
+  isFetching: false,
+  errorMessage: null,
 };
 
 const toggleTask = (state, payload) => ({
   ...state,
-  tasks: state.tasks.map((task) => {
+  items: state.items.map((task) => {
     const { id, done } = task;
     if (id === payload) {
       return {
@@ -49,62 +35,47 @@ export default (state = initialState, { type, payload }) => {
     case FETCH_TASKS_STARTED:
       return {
         ...state,
-        loading: true,
+        isFetching: true,
       };
     case FETCH_TASKS_SUCCESS:
       return {
         ...state,
-        loading: false,
-        tasks: [...payload],
+        isFetching: false,
+        items: [...payload],
       };
     case FETCH_TASKS_FAILURE:
       return {
         ...state,
-        loading: false,
-        error: payload,
-      };
-    case ADD_TASK_STARTED:
-      return {
-        ...state,
-        loading: true,
+        isFetching: false,
+        errorMessage: payload,
       };
     case ADD_TASK_SUCCESS:
       return {
         ...state,
-        tasks: [payload, ...state.tasks],
-        loading: false,
+        items: [payload, ...state.items],
       };
     case ADD_TASK_FAILURE:
       return {
         ...state,
-        loading: false,
-        error: payload,
-      };
-    case DELETE_TASK_STARTED:
-      return {
-        ...state,
-        loading: true,
+        errorMessage: payload,
       };
     case DELETE_TASK_SUCCESS:
       return {
         ...state,
-        tasks: state.tasks.filter(({ id }) => id !== payload),
-        loading: false,
-        error: '',
+        items: state.items.filter(({ id }) => id !== payload),
+        errorMessage: null,
       };
     case DELETE_TASK_FAILURE:
       return {
         ...state,
-        loading: false,
-        error: payload,
+        errorMessage: payload,
       };
-    case TOGGLE_TASK_STARTED:
     case TOGGLE_TASK_SUCCESS:
       return toggleTask(state, payload);
     case TOGGLE_TASK_FAILURE:
       return {
         ...state,
-        error: payload,
+        errorMessage: payload,
       };
     default:
       return state;

@@ -1,31 +1,38 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  fetchLists,
+  fetchListsAction,
   addListAction,
   deleteListAction,
+  // deleteTaskAction,
 } from '../../store/actions/lists';
 import { Page } from '../../layout/page';
 import { Title } from '../../components/title';
-// import { AddBoardModal } from '../../components/modal/add-board-modal';
 import { Button } from '../../components/button';
 
 export const BoardPage = () => {
-  // const [showModal, setShowModal] = useState(false);
+  const [showCreateList, setShowCreateList] = useState(false);
+  const [showCreateTask, setShowCreateTask] = useState(false);
+  const [newList, setNewList] = useState('');
+
   const { boardId } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchLists(boardId));
+    dispatch(fetchListsAction(boardId));
   }, []);
 
-  // const addList = useCallback(
-  //   (item) => {
-  //     dispatch(addListAction(item));
-  //   },
-  //   [dispatch],
-  // );
+  useEffect(() => {
+    dispatch(fetchListsAction(boardId));
+  }, [boardId]);
+
+  const addList = useCallback(
+    (item) => {
+      dispatch(addListAction(item));
+    },
+    [dispatch],
+  );
 
   const deleteList = useCallback(
     (id) => {
@@ -34,20 +41,38 @@ export const BoardPage = () => {
     [dispatch],
   );
 
-  const loading = useSelector((store) => store.lists.loading);
+  // const deleteTask = useCallback(
+  //   (id) => {
+  //     dispatch(deleteTaskAction(id));
+  //   },
+  //   [dispatch],
+  // );
+
+  const isFetching = useSelector((store) => store.lists.isFetching);
   const lists = useSelector((store) => store.lists.items) || [];
 
-  // const handleOpenModal = () => setShowModal(true);
-  // const handleCloseModal = () => setShowModal(false);
+  const handleCreateList = () => setShowCreateList(true);
+  const handleCanselCreateList = () => setShowCreateList(false);
 
-  // const hanleOkModal = (data) => {
-  //   addList(data);
-  // };
+  const handleListInput = ({ target }) => setNewList(target.value);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!newList.trim()) return;
+
+    addList({
+      title: newList,
+      boardId,
+    });
+    handleCanselCreateList();
+  };
 
   return (
     <Page>
       <Title>Lists</Title>
-      {loading && <p>loading...</p>}
+      {isFetching && <p>Loading...</p>}
+
       <ul>
         {lists.map(({ id, title, tasks = [] }) => (
           <li key={id}>
@@ -61,18 +86,38 @@ export const BoardPage = () => {
             </Button>
             <ul>
               {tasks.map(({ id: taskId, title: taskTitle }) => (
-                <li key={taskId}>{taskTitle}</li>
+                <li key={taskId}>
+                  {taskTitle}
+                  <Button
+                    type="button"
+                    // onClick={() => deleteTask(taskId)}
+                    className="ml-2"
+                  >
+                    Delete
+                  </Button>
+                </li>
               ))}
             </ul>
           </li>
         ))}
       </ul>
-      {/* <Button type="button" onClick={handleOpenModal}>
+      <Button type="button" onClick={handleCreateList}>
         Add board
-      </Button> */}
-      {/* {showModal && (
-        <AddListModal onOk={hanleOkModal} onClose={handleCloseModal} />
-      )} */}
+      </Button>
+      {showCreateList && (
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="list"
+            value={newList}
+            onChange={handleListInput}
+          />
+          <Button>Add</Button>
+          <Button type="button" onClick={handleCanselCreateList}>
+            Cancel
+          </Button>
+        </form>
+      )}
     </Page>
   );
 };

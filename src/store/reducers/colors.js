@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   items: [],
-  loading: false,
+  isFetching: false,
   error: null,
 };
 
@@ -15,18 +15,18 @@ export default (state = initialState, { type, payload }) => {
     case FETCH_COLORS_STARTED:
       return {
         ...state,
-        loading: true,
+        isFetching: true,
       };
     case FETCH_COLORS_SUCCESS:
       return {
         ...state,
-        loading: false,
+        isFetching: false,
         items: [...payload],
       };
     case FETCH_COLORS_FAILURE:
       return {
         ...state,
-        loading: false,
+        isFetching: false,
         error: payload,
       };
     default:

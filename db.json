@@ -20,28 +20,29 @@
   ],
   "lists": [
     {
-      "boardId": 2,
-      "id": 4,
-      "title": "List 3",
-      "timestamp": 1587228097274
-    },
-    {
       "boardId": 1,
       "id": 3,
-      "title": "List 3",
-      "timestamp": 1587228097274
+      "title": "List 3"
     },
     {
       "boardId": 1,
       "id": 2,
-      "title": "List 2",
-      "timestamp": 1587228097274
+      "title": "List 2"
     },
     {
       "boardId": 1,
       "id": 1,
-      "title": "List 1",
-      "timestamp": 1587228097274
+      "title": "List 1"
+    },
+    {
+      "title": "123",
+      "boardId": "1",
+      "id": 5
+    },
+    {
+      "title": "2345",
+      "boardId": "1",
+      "id": 6
     }
   ],
   "tasks": [
@@ -61,12 +62,6 @@
       "listId": 2,
       "id": 3,
       "title": "Тестовая таска",
-      "done": false
-    },
-    {
-      "listId": 2,
-      "id": 4,
-      "title": "123",
       "done": false
     }
   ],

@@ -35,11 +35,11 @@ export const fetchBoards = () => (dispatch) => {
   dispatch(fetchBoardsStart());
   axios
     .get('http://localhost:3004/boards?_expand=color&_sort=id&_order=asc')
-    .then((res) => {
-      dispatch(fetchBoardsSuccess(res.data));
+    .then(({ data }) => {
+      dispatch(fetchBoardsSuccess(data));
     })
-    .catch((err) => {
-      dispatch(fetchBoardsFailure(err.message));
+    .catch(({ message }) => {
+      dispatch(fetchBoardsFailure(message));
     });
 };
 
@@ -64,8 +64,8 @@ export const addBoardAction = (board) => (dispatch) => {
     .then(({ data }) => {
       dispatch(addBoardSuccess(data));
     })
-    .catch((err) => {
-      dispatch(addBoardFailure(err.message));
+    .catch(({ message }) => {
+      dispatch(addBoardFailure(message));
     });
 };
 
@@ -96,7 +96,7 @@ export const deleteBoardAction = (id) => (dispatch) => {
     .then(() => {
       dispatch(deleteBoardsSuccess(id));
     })
-    .catch((err) => {
-      dispatch(deleteBoardsFailure(err.message));
+    .catch(({ message }) => {
+      dispatch(deleteBoardsFailure(message));
     });
 };

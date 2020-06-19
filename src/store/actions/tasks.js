@@ -1,23 +1,24 @@
-import axios from 'axios';
 import {
-  FETCH_TASKS_STARTED,
-  FETCH_TASKS_SUCCESS,
-  FETCH_TASKS_FAILURE,
-  DELETE_TASK_STARTED,
   DELETE_TASK_SUCCESS,
   DELETE_TASK_FAILURE,
-  ADD_TASK_STARTED,
   ADD_TASK_SUCCESS,
   ADD_TASK_FAILURE,
+  EDIT_TASK_SUCCESS,
+  EDIT_TASK_FAILURE,
   TOGGLE_TASK_SUCCESS,
   TOGGLE_TASK_FAILURE,
 } from '../const';
 
-export const fetchTasksStart = () => {
-  return {
-    type: FETCH_TASKS_STARTED,
-  };
-};
+import {
+  fetchTasks,
+  createTask,
+  editTask,
+  deleteTask,
+} from '../../services/api';
+
+export const fetchTasksStart = () => ({
+  type: FETCH_TASKS_STARTED,
+});
 
 export const fetchTasksSuccess = (tasks) => {
   return {
@@ -26,28 +27,23 @@ export const fetchTasksSuccess = (tasks) => {
   };
 };
 
-export const fetchTasksFailure = (err) => {
+export const fetchTasksFailure = (error) => {
   return {
     type: FETCH_TASKS_FAILURE,
-    error: err,
+    payload: error,
   };
 };
 
-export const fetchTasks = () => (dispatch) => {
+export const fetchTasksAction = () => (dispatch) => {
   dispatch(fetchTasksStart());
-  axios
-    .get('http://localhost:3004/tasks?_sort=timestamp&_order=desc')
-    .then((res) => {
-      dispatch(fetchTasksSuccess(res.data));
+  fetchTasks()
+    .then(({ data }) => {
+      dispatch(fetchTasksSuccess(data));
     })
-    .catch((err) => {
-      dispatch(fetchTasksFailure(err.message));
+    .catch(({ message }) => {
+      dispatch(fetchTasksFailure(message));
     });
 };
-
-export const addTaskStart = () => ({
-  type: ADD_TASK_STARTED,
-});
 
 export const addTaskSuccess = (task) => ({
   type: ADD_TASK_SUCCESS,
@@ -56,52 +52,37 @@ export const addTaskSuccess = (task) => ({
 
 export const addTaskFailure = (error) => ({
   type: ADD_TASK_FAILURE,
-  payload: {
-    error,
-  },
+  payload: error,
 });
 
 export const addTaskAction = (task) => (dispatch) => {
   dispatch(addTaskStart());
-  axios
-    .post('http://localhost:3004/tasks', task)
-    .then(() => {
-      dispatch(addTaskSuccess(task));
+  createTask(task)
+    .then(({ data }) => {
+      dispatch(addTaskSuccess(data));
     })
-    .catch((err) => {
-      dispatch(addTaskFailure(err.message));
+    .catch(({ message }) => {
+      dispatch(addTaskFailure(message));
     });
 };
 
-export const deleteTasksStart = () => {
-  return {
-    type: DELETE_TASK_STARTED,
-  };
-};
+export const editTaskSuccess = (task) => ({
+  type: EDIT_TASK_SUCCESS,
+  payload: task,
+});
 
-export const deleteTasksSuccess = (tasks) => {
-  return {
-    type: DELETE_TASK_SUCCESS,
-    payload: tasks,
-  };
-};
+export const editTaskFailure = (error) => ({
+  type: EDIT_TASK_FAILURE,
+  payload: error,
+});
 
-export const deleteTasksFailure = (err) => {
-  return {
-    type: DELETE_TASK_FAILURE,
-    error: err,
-  };
-};
-
-export const deleteTaskAction = (id) => (dispatch) => {
-  dispatch(deleteTasksStart());
-  axios
-    .delete(`http://localhost:3004/tasks/${id}`)
-    .then(() => {
-      dispatch(deleteTasksSuccess(id));
+export const editTaskAction = (id, task) => (dispatch) => {
+  editTask(id, task)
+    .then(({ data }) => {
+      dispatch(editTaskSuccess(data));
     })
-    .catch((err) => {
-      dispatch(deleteTasksFailure(err.message));
+    .catch(({ message }) => {
+      dispatch(editTaskFailure(message));
     });
 };
 
@@ -112,20 +93,47 @@ export const toggleTaskSuccess = (id) => ({
 
 export const toggleTaskFailure = (error) => ({
   type: TOGGLE_TASK_FAILURE,
-  payload: {
-    error,
-  },
+  payload: error,
 });
 
 export const toggleTaskAction = (id, state) => (dispatch) => {
-  axios
-    .patch(`http://localhost:3004/tasks/${id}`, {
-      done: !state,
-    })
+  editTask(id, {
+    done: !state,
+  })
     .then(() => {
       dispatch(toggleTaskSuccess(id));
     })
-    .catch((err) => {
-      dispatch(toggleTaskFailure(err.message));
+    .catch(({ message }) => {
+      dispatch(toggleTaskFailure(message));
+    });
+};
+
+export const deleteTaskStart = () => {
+  return {
+    type: DELETE_TASK_STARTED,
+  };
+};
+
+export const deleteTaskSuccess = (id) => {
+  return {
+    type: DELETE_TASK_SUCCESS,
+    payload: id,
+  };
+};
+
+export const deleteTaskFailure = (error) => {
+  return {
+    type: DELETE_TASK_FAILURE,
+    payload: error,
+  };
+};
+
+export const deleteTaskAction = (id) => (dispatch) => {
+  deleteTask(id)
+    .then(() => {
+      dispatch(deleteTasksSuccess(id));
+    })
+    .catch(({ message }) => {
+      dispatch(deleteTasksFailure(message));
     });
 };

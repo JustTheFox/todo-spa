@@ -12,7 +12,7 @@ import {
 
 const initialState = {
   items: [],
-  loading: false,
+  isFetching: false,
   error: null,
 };
 
@@ -21,53 +21,53 @@ export default (state = initialState, { type, payload }) => {
     case FETCH_BOARDS_STARTED:
       return {
         ...state,
-        loading: true,
+        isFetching: true,
       };
     case FETCH_BOARDS_SUCCESS:
       return {
         ...state,
-        loading: false,
+        isFetching: false,
         items: [...payload],
       };
     case FETCH_BOARDS_FAILURE:
       return {
         ...state,
-        loading: false,
+        isFetching: false,
         error: payload,
       };
     case ADD_BOARD_STARTED:
       return {
         ...state,
-        loading: true,
+        isFetching: true,
       };
     case ADD_BOARD_SUCCESS:
       return {
         ...state,
         items: [payload, ...state.items],
-        loading: false,
+        isFetching: false,
       };
     case ADD_BOARD_FAILURE:
       return {
         ...state,
-        loading: false,
+        isFetching: false,
         error: payload,
       };
     case DELETE_BOARD_STARTED:
       return {
         ...state,
-        loading: true,
+        isFetching: true,
       };
     case DELETE_BOARD_SUCCESS:
       return {
         ...state,
         items: state.items.filter(({ id }) => id !== payload),
-        loading: false,
+        isFetching: false,
         error: '',
       };
     case DELETE_BOARD_FAILURE:
       return {
         ...state,
-        loading: false,
+        isFetching: false,
         error: payload,
       };
     default:
