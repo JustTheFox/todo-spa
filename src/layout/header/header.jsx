@@ -20,9 +20,9 @@ export const Header = () => {
       <div className="header__logo">
         <Logo />
       </div>
-      <div className="header__search">
+      {/* <div className="header__search">
         <Search />
-      </div>
+      </div> */}
       <div className="header__theme-btn">
         <Button
           theme={btnTheme}

@@ -4,13 +4,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   fetchListsAction,
   createListAction,
+  // editListAction,
   deleteListAction,
   createTaskAction,
-  // editTask,
+  // editTaskAction,
   deleteTaskAction,
 } from '../../store/actions/lists';
 import { Page } from '../../layout/page';
 import { Title } from '../../components/title';
+import { Input } from '../../components/field';
 import { Button } from '../../components/button';
 
 export const BoardPage = () => {
@@ -87,58 +89,67 @@ export const BoardPage = () => {
     handleCanselCreateList();
   };
 
+  const renderList = () => {
+    if (lists.length === 0) {
+      return <p>The board is empty. Do you want to create a new list?</p>;
+    } else {
+      return (
+        <ul>
+          {lists.map(({ id, title, tasks = [] }) => (
+            <li key={id}>
+              {title}
+              <Button
+                type="button"
+                onClick={() => deleteList(id)}
+                className="ml-2"
+              >
+                Delete
+              </Button>
+              <ul>
+                {tasks.map(({ id: taskId, title: taskTitle }) => (
+                  <li key={taskId}>
+                    {taskTitle}
+                    <Button
+                      type="button"
+                      // onClick={() => deleteTask(taskId)}
+                      className="ml-2"
+                    >
+                      Delete
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+              <Button type="button" onClick={handleCreateTask}>
+                Add task
+              </Button>
+              {showCreateTask && (
+                <form onSubmit={handleSubmitTask}>
+                  <Input
+                    type="text"
+                    name="task"
+                    value={newTask}
+                    onChange={handleTaskInput}
+                  />
+                  <Button>Add</Button>
+                  <Button type="button" onClick={handleCanselCreateTask}>
+                    Cancel
+                  </Button>
+                </form>
+              )}
+            </li>
+          ))}
+        </ul>
+      );
+    }
+  };
+
   return (
     <Page>
-      <Title>Lists</Title>
+      <Title size="large">Lists</Title>
       {isFetching && <p>Loading...</p>}
-
-      <ul>
-        {lists.map(({ id, title, tasks = [] }) => (
-          <li key={id}>
-            {title}
-            <Button
-              type="button"
-              onClick={() => deleteList(id)}
-              className="ml-2"
-            >
-              Delete
-            </Button>
-            <ul>
-              {tasks.map(({ id: taskId, title: taskTitle }) => (
-                <li key={taskId}>
-                  {taskTitle}
-                  <Button
-                    type="button"
-                    // onClick={() => deleteTask(taskId)}
-                    className="ml-2"
-                  >
-                    Delete
-                  </Button>
-                </li>
-              ))}
-            </ul>
-            <Button type="button" onClick={handleCreateTask}>
-              Add task
-            </Button>
-            {showCreateTask && (
-              <form onSubmit={handleSubmitTask}>
-                <input
-                  type="text"
-                  name="task"
-                  value={newTask}
-                  onChange={handleTaskInput}
-                />
-                <Button>Add</Button>
-                <Button type="button" onClick={handleCanselCreateTask}>
-                  Cancel
-                </Button>
-              </form>
-            )}
-          </li>
-        ))}
-      </ul>
+      {renderList()}
       <Button type="button" onClick={handleCreateList}>
-        Add list
+        Create
       </Button>
       {showCreateList && (
         <form onSubmit={handleSubmit}>

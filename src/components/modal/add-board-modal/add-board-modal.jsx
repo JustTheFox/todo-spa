@@ -33,9 +33,7 @@ export const AddBoardModal = ({ onOk, onClose, ...props }) => {
           value={value}
           onChange={handleChange}
         />
-        <Button className="mr-2" disabled={!value}>
-          Create
-        </Button>
+        <Button disabled={!value}>Create</Button>
         <Button type="button" onClick={handleClose}>
           Cansel
         </Button>

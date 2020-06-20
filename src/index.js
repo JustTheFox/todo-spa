@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 import { ThemeProvider } from './context/theme-context';
 import { App } from './routes';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.scss';
 
 render(

@@ -1,9 +1,10 @@
 import React from 'react';
+import cn from 'classnames';
 import './form.scss';
 
-const Form = ({ children, onSubmit }) => {
+const Form = ({ children, className, onSubmit }) => {
   return (
-    <form onSubmit={onSubmit} className="form">
+    <form onSubmit={onSubmit} className={cn('form', className)}>
       {children}
     </form>
   );
