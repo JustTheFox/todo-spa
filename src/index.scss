@@ -44,13 +44,9 @@ body,
   overflow: hidden;
 }
 
-html {
-  background-color: rgb(176, 70, 50);
-}
-
 body {
   margin: 0;
-  // background: var(--theme-ui-colors-muted);
+  background: var(--theme-ui-colors-muted);
   color: var(--theme-ui-colors-text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

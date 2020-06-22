@@ -1,0 +1,47 @@
+.board-item {
+  display: inline-flex;
+  width: 150px;
+  height: 100px;
+  margin: 8px;
+  border-radius: 3px;
+  background-color: rgba(9, 30, 66, 0.04);
+
+  &__wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+  }
+
+  &__link {
+    flex-direction: column;
+    justify-content: space-between;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  &__button {
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  &__title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size: 16px;
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+}

@@ -5,14 +5,15 @@
   padding: 0 8px;
   border: none;
   border-radius: 3px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(9, 30, 66, 0.04);
   color: var(--theme-ui-colors-button-text-primary);
   text-align: center;
   cursor: pointer;
+  transition: background $base-animation;
 
   &:hover,
   &:focus {
-    background-color: rgba(255, 255, 255, 0.35);
+    background: rgba(9, 30, 66, 0.08);
   }
 
   & + & {
