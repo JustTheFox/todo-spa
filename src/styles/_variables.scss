@@ -4,8 +4,15 @@ $font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
 $font-size: 14px;
 $font-weight: 400;
 
+// Media Queries
+$mobile: 474px;
+$fablet: 767px;
+$tablet: 1023px;
+$laptop: 1279px;
+$desktop: 1919px;
+
 // Sizes
-$content-width: 550px;
+$max-content-width: 1280px;
 
 // Animation
 $animation-play-time: 150ms;

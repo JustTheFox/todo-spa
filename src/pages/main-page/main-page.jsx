@@ -4,7 +4,6 @@ import { deleteBoardAction } from '../../store/actions/boards';
 import { Page } from '../../layout/page';
 import { Title } from '../../components/title';
 import { fetchBoards } from '../../store/actions/boards';
-import { Button } from '../../components/button';
 import { BoardList, BoardItem } from '../../components/boards';
 
 export const MainPage = () => {

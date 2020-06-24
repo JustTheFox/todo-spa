@@ -1,0 +1,20 @@
+@import '../../../styles/index';
+
+.card-list {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 100px);
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+
+  &__create {
+    @include flex();
+    margin-left: 8px;
+    width: 272px;
+  }
+
+  &__create-btn {
+    width: 100%;
+  }
+}

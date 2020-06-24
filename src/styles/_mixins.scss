@@ -3,3 +3,22 @@
   font-weight: $weight;
   line-height: $height;
 }
+
+@mixin flex($grow: 0, $shrink: 0, $basis: auto) {
+  flex-grow: $grow;
+  flex-shrink: $shrink;
+  flex-basis: $basis;
+}
+
+@mixin text-overflow($width: 200px) {
+  max-width: $width;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@mixin media-query($media) {
+  @media screen and (max-width: $media) {
+    @content;
+  }
+}

@@ -1,10 +1,19 @@
 @import '../../../styles/index';
 
-.board-item {
-  display: inline-flex;
-  height: 150px;
+.card-item {
+  @include flex();
+  display: block;
+  width: 272px;
+  max-height: 100%;
+  padding: 8px;
+  margin: 0;
   border-radius: 3px;
   background-color: rgba(9, 30, 66, 0.04);
+  overflow-y: auto;
+
+  & + & {
+    margin-left: 8px;
+  }
 
   &__wrapper {
     display: flex;

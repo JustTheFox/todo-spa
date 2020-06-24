@@ -1,8 +1,10 @@
 import React, { useEffect, useCallback } from 'react';
+import cn from 'classnames';
 import { ModalPortal } from './modal-portal';
+import { Title } from '../title';
 import './modal.scss';
 
-export const Modal = ({ children, title, onClose }) => {
+export const Modal = ({ children, title, onClose, size = 'medium' }) => {
   const onCloseCallback = useCallback(() => onClose(), [onClose]);
   const onEscPressHandler = useCallback(
     (e) => {
@@ -22,24 +24,28 @@ export const Modal = ({ children, title, onClose }) => {
 
   return (
     <ModalPortal>
-      <div className="modal d-block">
-        <div className="modal-overlay" onClick={onCloseCallback} />
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">{title}</h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-                onClick={onCloseCallback}
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">{children}</div>
+      <div
+        className={cn('modal', {
+          'modal--small': size === 'small',
+          'modal--medium': size === 'medium',
+          'modal--large': size === 'large',
+        })}
+      >
+        <div className="modal__content">
+          <div className="modal__header">
+            <Title tagName="h5" size="medium">
+              {title}
+            </Title>
+            <button
+              type="button"
+              className="modal__close"
+              aria-label="Close"
+              onClick={onCloseCallback}
+            >
+              &times;
+            </button>
           </div>
+          <div className="modal__body">{children}</div>
         </div>
       </div>
     </ModalPortal>
