@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   FETCH_BOARDS_STARTED,
   FETCH_BOARDS_SUCCESS,
@@ -6,10 +5,18 @@ import {
   CREATE_BOARD_STARTED,
   CREATE_BOARD_SUCCESS,
   CREATE_BOARD_FAILURE,
+  TOGGLE_BOARD_SUCCESS,
+  TOGGLE_BOARD_FAILURE,
   DELETE_BOARD_STARTED,
   DELETE_BOARD_SUCCESS,
   DELETE_BOARD_FAILURE,
 } from '../const';
+import {
+  fetchBoards,
+  createBoard,
+  editBoard,
+  deleteBoard,
+} from '../../services/api';
 
 export const fetchBoardsStart = () => {
   return {
@@ -31,10 +38,9 @@ export const fetchBoardsFailure = (error) => {
   };
 };
 
-export const fetchBoards = () => (dispatch) => {
+export const fetchBoardsAction = () => (dispatch) => {
   dispatch(fetchBoardsStart());
-  axios
-    .get('http://localhost:3004/boards?_expand=color&_sort=id&_order=asc')
+  fetchBoards()
     .then(({ data }) => {
       dispatch(fetchBoardsSuccess(data));
     })
@@ -59,13 +65,34 @@ export const createBoardFailure = (error) => ({
 
 export const createBoardAction = (board) => (dispatch) => {
   dispatch(createBoardStart());
-  axios
-    .post('http://localhost:3004/boards', board)
+  createBoard(board)
     .then(({ data }) => {
       dispatch(createBoardSuccess(data));
     })
     .catch(({ message }) => {
       dispatch(createBoardFailure(message));
+    });
+};
+
+export const toggleBoardSuccess = (id) => ({
+  type: TOGGLE_BOARD_SUCCESS,
+  payload: id,
+});
+
+export const toggleBoardFailure = (error) => ({
+  type: TOGGLE_BOARD_FAILURE,
+  payload: error,
+});
+
+export const toggleBoardAction = (id, state) => (dispatch) => {
+  editBoard(id, {
+    favorite: !state,
+  })
+    .then(() => {
+      dispatch(toggleBoardSuccess(id));
+    })
+    .catch(({ message }) => {
+      dispatch(toggleBoardFailure(message));
     });
 };
 
@@ -91,8 +118,7 @@ export const deleteBoardsFailure = (error) => {
 
 export const deleteBoardAction = (id) => (dispatch) => {
   dispatch(deleteBoardsStart());
-  axios
-    .delete(`http://localhost:3004/boards/${id}`)
+  deleteBoard(id)
     .then(() => {
       dispatch(deleteBoardsSuccess(id));
     })

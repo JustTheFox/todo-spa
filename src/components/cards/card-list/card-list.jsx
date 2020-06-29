@@ -33,8 +33,8 @@ export const CardList = ({ boardId, children }) => {
     if (!newList.trim()) return;
 
     createList({
+      boardId: Number(boardId),
       title: newList,
-      boardId,
     });
     handleCanselCreate();
   };

@@ -3,105 +3,105 @@
     {
       "id": 1,
       "title": "Board 1",
+      "favorite": true,
       "colorId": 8
     },
     {
-      "title": "ertertet",
-      "colorId": 1,
-      "timestamp": 1592313814876,
+      "title": "Board 2",
+      "favorite": true,
+      "colorId": 8,
       "id": 7
     },
     {
       "title": "dsfdsfsfsdfsdfsdfsdfsdfsdf",
       "colorId": 1,
-      "timestamp": 1592334964261,
+      "favorite": false,
       "id": 8
     },
     {
       "title": "nn,",
       "colorId": 1,
-      "timestamp": 1592599055572,
+      "favorite": false,
       "id": 9
-    },
-    {
-      "title": "mn m ",
-      "colorId": 1,
-      "timestamp": 1592599060388,
-      "id": 10
-    },
-    {
-      "title": "sdasdasdads",
-      "colorId": 1,
-      "timestamp": 1593019061760,
-      "id": 11
-    },
-    {
-      "title": "1213123123",
-      "colorId": 1,
-      "timestamp": 1593019069147,
-      "id": 12
     }
   ],
   "lists": [
-    {
-      "boardId": 1,
-      "id": 2,
-      "title": "List 2"
-    },
     {
       "boardId": 1,
       "id": 1,
       "title": "List 1"
     },
     {
-      "title": "123",
-      "boardId": "1",
-      "id": 5
+      "boardId": 1,
+      "title": "qwerty",
+      "id": 15
     },
     {
-      "title": "2345",
-      "boardId": "1",
-      "id": 6
-    },
-    {
-      "title": "324242",
-      "boardId": "1",
-      "id": 10
-    },
-    {
-      "title": "123",
-      "boardId": "7",
-      "id": 11
-    },
-    {
-      "title": "dsasdasdasd",
-      "boardId": "12",
-      "id": 12
-    },
-    {
-      "title": "Test",
-      "boardId": "1",
-      "id": 13
+      "boardId": 1,
+      "title": "dsadasddadad",
+      "id": 16
     }
   ],
   "tasks": [
     {
       "listId": 1,
       "id": 1,
-      "title": "Create App",
-      "done": false
+      "title": "Create App"
     },
     {
       "listId": 1,
       "id": 2,
-      "title": "Что нужно сделать",
-      "done": false
+      "title": "Что нужно сделать"
     },
     {
-      "listId": 2,
-      "id": 3,
-      "title": "Тестовая таска",
-      "done": false
+      "listId": 1,
+      "title": "123",
+      "id": 4
+    },
+    {
+      "listId": 1,
+      "title": "dfsgdfgd",
+      "id": 6
+    },
+    {
+      "listId": 1,
+      "title": "adadasdad",
+      "id": 7
+    },
+    {
+      "listId": 1,
+      "title": "sdfgdsfgdsg",
+      "id": 10
+    },
+    {
+      "listId": 15,
+      "title": "asdsadasd",
+      "id": 11
+    },
+    {
+      "listId": 15,
+      "title": "sdsdd",
+      "id": 12
+    },
+    {
+      "listId": 15,
+      "title": "adasdad",
+      "id": 13
+    },
+    {
+      "listId": 15,
+      "title": "xcvxcv",
+      "id": 14
+    },
+    {
+      "listId": 15,
+      "title": "12345",
+      "id": 16
+    },
+    {
+      "listId": 16,
+      "title": "sadasdasd",
+      "id": 17
     }
   ],
   "colors": [

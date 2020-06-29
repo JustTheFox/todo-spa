@@ -12,8 +12,6 @@ import {
   CREATE_TASK_FAILURE,
   EDIT_TASK_SUCCESS,
   EDIT_TASK_FAILURE,
-  TOGGLE_TASK_SUCCESS,
-  TOGGLE_TASK_FAILURE,
   DELETE_TASK_SUCCESS,
   DELETE_TASK_FAILURE,
 } from '../const';
@@ -86,8 +84,8 @@ export const editListFailure = (error) => ({
   payload: error,
 });
 
-export const editListAction = (id) => (dispatch) => {
-  editList(id)
+export const editListAction = (id, params) => (dispatch) => {
+  editList(id, params)
     .then(({ data }) => {
       dispatch(editListSuccess(data));
     })
@@ -150,38 +148,13 @@ export const editTaskFailure = (error) => ({
   payload: error,
 });
 
-export const editTaskAction = (id, task) => (dispatch) => {
-  editTask(id, task)
+export const editTaskAction = (id, params) => (dispatch) => {
+  editTask(id, params)
     .then(({ data }) => {
       dispatch(editTaskSuccess(data));
     })
     .catch(({ message }) => {
       dispatch(editTaskFailure(message));
-    });
-};
-
-export const toggleTaskSuccess = (listId, taskId) => ({
-  type: TOGGLE_TASK_SUCCESS,
-  payload: {
-    listId,
-    taskId,
-  },
-});
-
-export const toggleTaskFailure = (error) => ({
-  type: TOGGLE_TASK_FAILURE,
-  payload: error,
-});
-
-export const toggleTaskAction = (listId, taskId, state) => (dispatch) => {
-  editTask(taskId, {
-    done: !state,
-  })
-    .then(() => {
-      dispatch(toggleTaskSuccess(listId, taskId));
-    })
-    .catch(({ message }) => {
-      dispatch(toggleTaskFailure(message));
     });
 };
 

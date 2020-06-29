@@ -1,17 +1,21 @@
 @import '../../../styles/index';
 
 .card-list {
+  list-style: none;
   display: flex;
+  align-items: flex-start;
   width: 100%;
   height: calc(100vh - 100px);
-  padding: 0;
+  padding: 0 0 24px 0;
   overflow-y: auto;
-  list-style: none;
 
   &__create {
     @include flex();
-    margin-left: 8px;
     width: 272px;
+
+    &:not(:first-child) {
+      margin-left: 8px;
+    }
   }
 
   &__create-btn {

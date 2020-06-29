@@ -26,7 +26,7 @@ export const BoardList = ({ children }) => {
     <>
       <ul className="board-list">
         <>{children}</>
-        <BoardItem isCreate onClick={handleOpenModal}>
+        <BoardItem isCreate onCreate={handleOpenModal}>
           Create new board
         </BoardItem>
       </ul>

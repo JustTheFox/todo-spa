@@ -3,8 +3,8 @@
 .board-list {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  row-gap: 4px;
-  column-gap: 4px;
+  row-gap: 8px;
+  column-gap: 8px;
   max-width: 1920px;
   margin: 0 auto;
   padding: 0;

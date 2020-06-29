@@ -1,19 +1,16 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   fetchListsAction,
-  createListAction,
-  // editListAction,
+  editListAction,
   deleteListAction,
-  createTaskAction,
-  // editTaskAction,
+  editTaskAction,
   deleteTaskAction,
 } from '../../store/actions/lists';
 import { Page } from '../../layout/page';
 import { Title } from '../../components/title';
-import { Button } from '../../components/button';
-import { CardList, CardItem } from '../../components/cards';
+import { CardList, CardItem, CardTask } from '../../components/cards';
 
 export const BoardPage = () => {
   const { boardId } = useParams();
@@ -23,61 +20,65 @@ export const BoardPage = () => {
     dispatch(fetchListsAction(boardId));
   }, []);
 
-  useEffect(() => {
-    dispatch(fetchListsAction(boardId));
-  }, [boardId]);
+  const editList = useCallback(
+    (id, params) => {
+      dispatch(editListAction(id, params));
+    },
+    [dispatch],
+  );
 
-  // const deleteList = useCallback(
-  //   (id) => {
-  //     dispatch(deleteListAction(id));
-  //   },
-  //   [dispatch],
-  // );
+  const deleteList = useCallback(
+    (id) => {
+      dispatch(deleteListAction(id));
+    },
+    [dispatch],
+  );
 
-  // const deleteTask = useCallback(
-  //   (id) => {
-  //     dispatch(deleteTaskAction(id));
-  //   },
-  //   [dispatch],
-  // );
+  const editTask = useCallback(
+    (id, params) => {
+      dispatch(editTaskAction(id, params));
+    },
+    [dispatch],
+  );
+
+  const deleteTask = useCallback(
+    (listId, taskId) => {
+      dispatch(deleteTaskAction(listId, taskId));
+    },
+    [dispatch],
+  );
 
   const isFetching = useSelector((store) => store.lists.isFetching);
   const lists = useSelector((store) => store.lists.items) || [];
-
-  const renderList = () => {
-    if (lists.length === 0) {
-      return <p>The board is empty. Do you want to create a new list?</p>;
-    } else {
-      return (
-        <CardList boardId={boardId}>
-          {lists.map(({ id, title, tasks = [] }) => (
-            <CardItem key={id} id={id} title={title} tasks={tasks}>
-              {/* <ul>
-                {tasks.map(({ id: taskId, title: taskTitle }) => (
-                  <li key={taskId}>
-                    {taskTitle}
-                    <Button
-                      type="button"
-                      // onClick={() => deleteTask(taskId)}
-                      className="ml-2"
-                    >
-                      Delete
-                    </Button>
-                  </li>
-                ))}
-              </ul> */}
-            </CardItem>
-          ))}
-        </CardList>
-      );
-    }
-  };
 
   return (
     <Page>
       <Title size="large">Lists</Title>
       {isFetching && <p>Loading...</p>}
-      {renderList()}
+      <CardList boardId={boardId}>
+        {lists.map(({ id, title, tasks = [] }) => (
+          <CardItem
+            key={id}
+            id={id}
+            boardId={boardId}
+            title={title}
+            onEdit={editList}
+            onDelete={deleteList}
+          >
+            {tasks.map(({ id: taskId, title: taskTitle }) => (
+              <CardTask
+                key={taskId}
+                id={taskId}
+                listId={id}
+                onEdit={editTask}
+                onDelete={deleteTask}
+              >
+                {taskTitle}
+              </CardTask>
+            ))}
+          </CardItem>
+        ))}
+      </CardList>
     </Page>
   );
 };

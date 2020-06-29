@@ -4,17 +4,14 @@ import {
   FETCH_LISTS_FAILURE,
   CREATE_LIST_SUCCESS,
   CREATE_LIST_FAILURE,
-  EDIT_BOARD_SUCCESS,
-  EDIT_BOARD_FAILURE,
+  EDIT_LIST_SUCCESS,
+  EDIT_LIST_FAILURE,
   DELETE_LIST_SUCCESS,
   DELETE_LIST_FAILURE,
-  CREATE_TASK_STARTED,
   CREATE_TASK_SUCCESS,
   CREATE_TASK_FAILURE,
   EDIT_TASK_SUCCESS,
   EDIT_TASK_FAILURE,
-  TOGGLE_TASK_SUCCESS,
-  TOGGLE_TASK_FAILURE,
   DELETE_TASK_SUCCESS,
   DELETE_TASK_FAILURE,
 } from '../const';
@@ -22,28 +19,58 @@ import {
 const initialState = {
   items: [],
   isFetching: false,
-  errorMessage: null,
+  error: null,
 };
 
-const toggleTask = (state, listId, taskId) =>
-  state.items.map((list) => {
-    if (list.id !== listId) return list;
+const editList = (state, payload) => {
+  return state.items.map((list) => {
+    if (list.id === payload.id) {
+      return {
+        ...list,
+        ...payload,
+      };
+    } else return list;
+  });
+};
 
-    list.tasks.map((task) => {
-      if (task.id !== taskId) return task;
+const addTask = (state, payload) =>
+  state.items.map((list) => {
+    if (list.id === payload.listId) {
+      return {
+        ...list,
+        tasks: [...list.tasks, payload],
+      };
+    }
+    return list;
+  });
+
+const editTask = (state, payload) => {
+  return state.items.map((list) => {
+    if (list.id === payload.listId) {
+      const changedTask = list.tasks.map((task) => {
+        if (task.id === payload.id) {
+          return {
+            ...payload,
+          };
+        }
+        return task;
+      });
 
       return {
-        ...task,
-        done: !task.done,
+        ...list,
+        tasks: [...changedTask],
       };
-    });
+    }
+    return list;
   });
+};
 
-const deleteTask = (state, listId, taskId) =>
-  state.items.map((list) => {
-    if (list.id !== listId) return list;
-    return list.tasks.filter(({ id }) => id !== taskId);
+const deleteTask = (state, listId, taskId) => {
+  return state.items.map((list) => {
+    if (list.id === listId) return list.tasks.filter(({ id }) => id !== taskId);
+    return list;
   });
+};
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
@@ -62,17 +89,33 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         isFetching: false,
-        errorMessage: payload,
+        error: payload,
       };
     case CREATE_LIST_SUCCESS:
       return {
         ...state,
-        items: [...state.items, payload],
+        items: [
+          ...state.items,
+          {
+            ...payload,
+            tasks: [],
+          },
+        ],
       };
     case CREATE_LIST_FAILURE:
       return {
         ...state,
-        errorMessage: payload,
+        error: payload,
+      };
+    case EDIT_LIST_SUCCESS:
+      return {
+        ...state,
+        items: [...editList(state, payload)],
+      };
+    case EDIT_LIST_FAILURE:
+      return {
+        ...state,
+        error: payload,
       };
     case DELETE_LIST_SUCCESS:
       return {
@@ -82,31 +125,37 @@ export default (state = initialState, { type, payload }) => {
     case DELETE_LIST_FAILURE:
       return {
         ...state,
-        errorMessage: payload,
+        error: payload,
       };
     case CREATE_TASK_SUCCESS:
       return {
         ...state,
-        items: [...state.items, payload],
+        items: [...addTask(state, payload)],
       };
     case CREATE_TASK_FAILURE:
       return {
         ...state,
-        errorMessage: payload,
+        error: payload,
       };
-    case TOGGLE_TASK_SUCCESS:
-      return toggleTask(state, payload);
-    case TOGGLE_TASK_FAILURE:
+    case EDIT_TASK_SUCCESS:
       return {
         ...state,
-        errorMessage: payload,
+        items: [...editTask(state, payload)],
+      };
+    case EDIT_TASK_FAILURE:
+      return {
+        ...state,
+        error: payload,
       };
     case DELETE_TASK_SUCCESS:
-      return deleteTask(state, payload.listId, payload.taskId);
+      return {
+        ...state,
+        ...deleteTask(state, payload.listId, payload.taskId),
+      };
     case DELETE_TASK_FAILURE:
       return {
         ...state,
-        errorMessage: payload,
+        error: payload,
       };
 
     default:

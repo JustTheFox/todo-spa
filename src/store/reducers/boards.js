@@ -5,6 +5,8 @@ import {
   CREATE_BOARD_STARTED,
   CREATE_BOARD_SUCCESS,
   CREATE_BOARD_FAILURE,
+  TOGGLE_BOARD_SUCCESS,
+  TOGGLE_BOARD_FAILURE,
   DELETE_BOARD_STARTED,
   DELETE_BOARD_SUCCESS,
   DELETE_BOARD_FAILURE,
@@ -15,6 +17,17 @@ const initialState = {
   isFetching: false,
   error: null,
 };
+
+const toggleToFavorites = (state, id) =>
+  state.map((board) => {
+    if (board.id === id) {
+      return {
+        ...board,
+        favorite: !board.favorite,
+      };
+    }
+    return board;
+  });
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
@@ -50,6 +63,16 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         isFetching: false,
+        error: payload,
+      };
+    case TOGGLE_BOARD_SUCCESS:
+      return {
+        ...state,
+        items: [...toggleToFavorites(state, payload)],
+      };
+    case TOGGLE_BOARD_FAILURE:
+      return {
+        ...state,
         error: payload,
       };
     case DELETE_BOARD_STARTED:

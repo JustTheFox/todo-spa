@@ -22,7 +22,7 @@ export const editBoard = (id, params) => {
   return api.put(`/boards/${id}`, { ...params });
 };
 
-export const deleteBoards = (id) => {
+export const deleteBoard = (id) => {
   return api.delete(`/boards/${id}`);
 };
 

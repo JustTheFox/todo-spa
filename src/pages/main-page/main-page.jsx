@@ -1,17 +1,27 @@
 import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteBoardAction } from '../../store/actions/boards';
+import {
+  toggleBoardAction,
+  deleteBoardAction,
+} from '../../store/actions/boards';
 import { Page } from '../../layout/page';
 import { Title } from '../../components/title';
-import { fetchBoards } from '../../store/actions/boards';
+import { fetchBoardsAction } from '../../store/actions/boards';
 import { BoardList, BoardItem } from '../../components/boards';
 
 export const MainPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchBoards());
+    dispatch(fetchBoardsAction());
   }, []);
+
+  const toggleBoard = useCallback(
+    (id) => {
+      dispatch(toggleBoardAction(id));
+    },
+    [dispatch],
+  );
 
   const deleteBoard = useCallback(
     (id) => {
@@ -30,12 +40,14 @@ export const MainPage = () => {
       <Title>Boards</Title>
       {isFetching && <p>Loading...</p>}
       <BoardList>
-        {boards.map(({ id, title, color = '' }) => (
+        {boards.map(({ id, title, favorite, color = '' }) => (
           <BoardItem
             key={id}
             id={id}
+            favorite={favorite}
             color={color}
-            onDelete={() => deleteBoard(id)}
+            onToggle={toggleBoard}
+            onDelete={deleteBoard}
           >
             {title}
           </BoardItem>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Logo from '../../components/logo/logo';
-import Search from '../../components/search/search';
+// import Search from '../../components/search/search';
 import { Button } from '../../components/button';
 import { IconMoon, IconSun } from '../../components/icons/icons';
 import { useTheme } from '../../context/theme-context';
