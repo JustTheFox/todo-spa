@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
 import { Button } from '../../button';
-import { Input } from '../../field';
+import { Input } from '../../fields';
 import { IconPensil, IconTrash, IconCheck, IconClose } from '../../icons';
 import './card-task.scss';
 

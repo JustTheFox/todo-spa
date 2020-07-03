@@ -7,16 +7,8 @@ import {
   CREATE_BOARD_FAILURE,
   TOGGLE_BOARD_SUCCESS,
   TOGGLE_BOARD_FAILURE,
-  DELETE_BOARD_STARTED,
-  DELETE_BOARD_SUCCESS,
-  DELETE_BOARD_FAILURE,
 } from '../const';
-import {
-  fetchBoards,
-  createBoard,
-  editBoard,
-  deleteBoard,
-} from '../../services/api';
+import { fetchBoards, createBoard, editBoard } from '../../services/api';
 
 export const fetchBoardsStart = () => {
   return {
@@ -24,10 +16,10 @@ export const fetchBoardsStart = () => {
   };
 };
 
-export const fetchBoardsSuccess = (boards) => {
+export const fetchBoardsSuccess = (data) => {
   return {
     type: FETCH_BOARDS_SUCCESS,
-    payload: boards,
+    payload: data,
   };
 };
 
@@ -53,9 +45,9 @@ export const createBoardStart = () => ({
   type: CREATE_BOARD_STARTED,
 });
 
-export const createBoardSuccess = (board) => ({
+export const createBoardSuccess = (data) => ({
   type: CREATE_BOARD_SUCCESS,
-  payload: board,
+  payload: data,
 });
 
 export const createBoardFailure = (error) => ({
@@ -84,45 +76,15 @@ export const toggleBoardFailure = (error) => ({
   payload: error,
 });
 
-export const toggleBoardAction = (id, state) => (dispatch) => {
+export const toggleBoardAction = (id, params) => (dispatch) => {
   editBoard(id, {
-    favorite: !state,
+    ...params,
+    favorite: !params.favorite,
   })
     .then(() => {
       dispatch(toggleBoardSuccess(id));
     })
     .catch(({ message }) => {
       dispatch(toggleBoardFailure(message));
-    });
-};
-
-export const deleteBoardsStart = () => {
-  return {
-    type: DELETE_BOARD_STARTED,
-  };
-};
-
-export const deleteBoardsSuccess = (board) => {
-  return {
-    type: DELETE_BOARD_SUCCESS,
-    payload: board,
-  };
-};
-
-export const deleteBoardsFailure = (error) => {
-  return {
-    type: DELETE_BOARD_FAILURE,
-    payload: error,
-  };
-};
-
-export const deleteBoardAction = (id) => (dispatch) => {
-  dispatch(deleteBoardsStart());
-  deleteBoard(id)
-    .then(() => {
-      dispatch(deleteBoardsSuccess(id));
-    })
-    .catch(({ message }) => {
-      dispatch(deleteBoardsFailure(message));
     });
 };

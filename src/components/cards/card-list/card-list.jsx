@@ -1,6 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
+import { findDOMNode } from 'react-dom';
 import { useDispatch } from 'react-redux';
-import { Input } from '../../field';
+import { Input } from '../../fields';
 import { Button } from '../../button';
 import {
   createListAction,
@@ -11,6 +12,16 @@ import './card-list.scss';
 export const CardList = ({ boardId, children }) => {
   const [showForm, setShowForm] = useState(false);
   const [newList, setNewList] = useState('');
+  const createBtnRef = useRef(null);
+
+  const scrollToBtn = (ref) => {
+    let node = findDOMNode(ref.current);
+    node.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+    });
+  };
+
   const dispatch = useDispatch();
   const createList = useCallback(
     (item) => {
@@ -37,13 +48,14 @@ export const CardList = ({ boardId, children }) => {
       title: newList,
     });
     handleCanselCreate();
+    scrollToBtn(createBtnRef);
   };
 
   return (
     <>
       <div className="card-list">
         <>{children}</>
-        <div className="card-list__create">
+        <div className="card-list__create" ref={createBtnRef}>
           {!showForm && (
             <Button className="card-list__create-btn" onClick={handleOpenForm}>
               Create list

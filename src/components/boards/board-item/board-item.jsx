@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { Button } from '../../button';
 import './board-item.scss';
-import { IconFavorite, IconTrash } from '../../icons';
+import { IconFavorite } from '../../icons';
 
 export const BoardItem = ({
   id,
@@ -12,11 +12,9 @@ export const BoardItem = ({
   favorite,
   isCreate,
   onToggle,
-  onDelete,
   onCreate,
 }) => {
   const handleToggle = () => onToggle(id, favorite);
-  const handleDelete = () => onDelete(id);
   const renderComponent = () => {
     if (!isCreate) {
       return (
@@ -35,9 +33,6 @@ export const BoardItem = ({
             >
               <IconFavorite />
             </Button>
-            <Button type="button" onClick={handleDelete} title="Delete">
-              <IconTrash />
-            </Button>
           </div>
         </>
       );
@@ -54,11 +49,7 @@ export const BoardItem = ({
     }
   };
   return (
-    <li
-      className={cn('board-item', {
-        color: color,
-      })}
-    >
+    <li className="board-item" style={{ backgroundColor: color?.hex }}>
       {renderComponent()}
     </li>
   );

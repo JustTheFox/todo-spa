@@ -1,9 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  toggleBoardAction,
-  deleteBoardAction,
-} from '../../store/actions/boards';
+import { toggleBoardAction } from '../../store/actions/boards';
 import { Page } from '../../layout/page';
 import { Title } from '../../components/title';
 import { fetchBoardsAction } from '../../store/actions/boards';
@@ -23,17 +20,8 @@ export const MainPage = () => {
     [dispatch],
   );
 
-  const deleteBoard = useCallback(
-    (id) => {
-      dispatch(deleteBoardAction(id));
-    },
-    [dispatch],
-  );
-
   const isFetching = useSelector((store) => store.boards.isFetching);
   const boards = useSelector((store) => store.boards.items) || [];
-
-  console.log(boards);
 
   return (
     <Page>
@@ -47,7 +35,6 @@ export const MainPage = () => {
             favorite={favorite}
             color={color}
             onToggle={toggleBoard}
-            onDelete={deleteBoard}
           >
             {title}
           </BoardItem>

@@ -2,27 +2,21 @@
   "boards": [
     {
       "id": 1,
-      "title": "Board 1",
+      "title": "Board 123",
       "favorite": true,
-      "colorId": 8
+      "colorId": 13
     },
     {
       "title": "Board 2",
       "favorite": true,
-      "colorId": 8,
+      "colorId": 14,
       "id": 7
     },
     {
       "title": "dsfdsfsfsdfsdfsdfsdfsdfsdf",
-      "colorId": 1,
+      "colorId": 3,
       "favorite": false,
       "id": 8
-    },
-    {
-      "title": "nn,",
-      "colorId": 1,
-      "favorite": false,
-      "id": 9
     }
   ],
   "lists": [
@@ -40,6 +34,21 @@
       "boardId": 1,
       "title": "dsadasddadad",
       "id": 16
+    },
+    {
+      "boardId": 8,
+      "title": "1",
+      "id": 17
+    },
+    {
+      "boardId": 8,
+      "title": "2",
+      "id": 18
+    },
+    {
+      "boardId": 8,
+      "title": "3",
+      "id": 19
     }
   ],
   "tasks": [

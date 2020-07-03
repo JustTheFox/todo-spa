@@ -1,16 +1,16 @@
 import React from 'react';
 import cn from 'classnames';
-import './field.scss';
+import './text-field.scss';
 
 export const Input = ({ className, onChange, error, ...props }) => {
   return (
-    <div className={cn('field', className)}>
+    <div className={cn('text-field', className)}>
       <input
-        className="field__input form-control"
+        className="text-field__input form-control"
         onChange={onChange}
         {...props}
       />
-      {error && <span className="field__error">{error}</span>}
+      {error && <span className="text-field__error">{error}</span>}
     </div>
   );
 };

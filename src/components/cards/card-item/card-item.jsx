@@ -1,9 +1,8 @@
 import React, { Children, useState, useCallback } from 'react';
-// import cn from 'classnames';
 import { useDispatch } from 'react-redux';
 import { createTaskAction } from '../../../store/actions/lists';
 import { Button } from '../../button';
-import { Input } from '../../field';
+import { Input } from '../../fields';
 import { IconPensil, IconTrash, IconCheck, IconClose } from '../../icons';
 import './card-item.scss';
 

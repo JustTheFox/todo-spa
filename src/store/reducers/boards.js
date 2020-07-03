@@ -7,9 +7,6 @@ import {
   CREATE_BOARD_FAILURE,
   TOGGLE_BOARD_SUCCESS,
   TOGGLE_BOARD_FAILURE,
-  DELETE_BOARD_STARTED,
-  DELETE_BOARD_SUCCESS,
-  DELETE_BOARD_FAILURE,
 } from '../const';
 
 const initialState = {
@@ -73,24 +70,6 @@ export default (state = initialState, { type, payload }) => {
     case TOGGLE_BOARD_FAILURE:
       return {
         ...state,
-        error: payload,
-      };
-    case DELETE_BOARD_STARTED:
-      return {
-        ...state,
-        isFetching: true,
-      };
-    case DELETE_BOARD_SUCCESS:
-      return {
-        ...state,
-        items: state.items.filter(({ id }) => id !== payload),
-        isFetching: false,
-        error: '',
-      };
-    case DELETE_BOARD_FAILURE:
-      return {
-        ...state,
-        isFetching: false,
         error: payload,
       };
     default:

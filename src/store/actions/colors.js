@@ -1,9 +1,9 @@
-import axios from 'axios';
 import {
   FETCH_COLORS_STARTED,
   FETCH_COLORS_SUCCESS,
   FETCH_COLORS_FAILURE,
 } from '../const';
+import { fetchColors } from '../../services/api';
 
 export const fetchColorsStart = () => {
   return {
@@ -11,10 +11,10 @@ export const fetchColorsStart = () => {
   };
 };
 
-export const fetchColorsSuccess = (lists) => {
+export const fetchColorsSuccess = (data) => {
   return {
     type: FETCH_COLORS_SUCCESS,
-    payload: lists,
+    payload: data,
   };
 };
 
@@ -25,14 +25,13 @@ export const fetchColorsFailure = (error) => {
   };
 };
 
-export const fetchColors = () => (dispatch) => {
+export const fetchColorsAction = () => (dispatch) => {
   dispatch(fetchColorsStart());
-  axios
-    .get('http://localhost:3004/colors?_sort=id&_order=asc')
-    .then((res) => {
-      dispatch(fetchColorsSuccess(res.data));
+  fetchColors()
+    .then(({ data }) => {
+      dispatch(fetchColorsSuccess(data));
     })
-    .catch((err) => {
-      dispatch(fetchColorsFailure(err.message));
+    .catch(({ message }) => {
+      dispatch(fetchColorsFailure(message));
     });
 };
