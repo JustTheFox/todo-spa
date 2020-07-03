@@ -1,0 +1,193 @@
+{
+  "boards": [
+    {
+      "id": 1,
+      "title": "Board 123",
+      "favorite": true,
+      "colorId": 13
+    },
+    {
+      "title": "Board 2",
+      "favorite": true,
+      "colorId": 14,
+      "id": 7
+    },
+    {
+      "title": "dsfdsfsfsdfsdfsdfsdfsdfsdf",
+      "colorId": 3,
+      "favorite": false,
+      "id": 8
+    }
+  ],
+  "lists": [
+    {
+      "boardId": 1,
+      "id": 1,
+      "title": "List 1"
+    },
+    {
+      "boardId": 1,
+      "title": "qwerty",
+      "id": 15
+    },
+    {
+      "boardId": 1,
+      "title": "dsadasddadad",
+      "id": 16
+    },
+    {
+      "boardId": 8,
+      "title": "1",
+      "id": 17
+    },
+    {
+      "boardId": 8,
+      "title": "2",
+      "id": 18
+    },
+    {
+      "boardId": 8,
+      "title": "3",
+      "id": 19
+    }
+  ],
+  "tasks": [
+    {
+      "listId": 1,
+      "id": 1,
+      "title": "Create App"
+    },
+    {
+      "listId": 1,
+      "id": 2,
+      "title": "Что нужно сделать"
+    },
+    {
+      "listId": 1,
+      "title": "123",
+      "id": 4
+    },
+    {
+      "listId": 1,
+      "title": "dfsgdfgd",
+      "id": 6
+    },
+    {
+      "listId": 1,
+      "title": "adadasdad",
+      "id": 7
+    },
+    {
+      "listId": 1,
+      "title": "sdfgdsfgdsg",
+      "id": 10
+    },
+    {
+      "listId": 15,
+      "title": "asdsadasd",
+      "id": 11
+    },
+    {
+      "listId": 15,
+      "title": "sdsdd",
+      "id": 12
+    },
+    {
+      "listId": 15,
+      "title": "adasdad",
+      "id": 13
+    },
+    {
+      "listId": 15,
+      "title": "xcvxcv",
+      "id": 14
+    },
+    {
+      "listId": 15,
+      "title": "12345",
+      "id": 16
+    },
+    {
+      "listId": 16,
+      "title": "sadasdasd",
+      "id": 17
+    }
+  ],
+  "colors": [
+    {
+      "id": 1,
+      "hex": "transparent",
+      "name": "transparent"
+    },
+    {
+      "id": 2,
+      "hex": "#f4433650",
+      "name": "red"
+    },
+    {
+      "id": 3,
+      "hex": "#e91e6350",
+      "name": "pink"
+    },
+    {
+      "id": 4,
+      "hex": "#9c27b050",
+      "name": "purple"
+    },
+    {
+      "id": 5,
+      "hex": "#673ab750",
+      "name": "deep-purple"
+    },
+    {
+      "id": 6,
+      "hex": "#2196f350",
+      "name": "blue"
+    },
+    {
+      "id": 7,
+      "hex": "#00bcd450",
+      "name": "light-blue"
+    },
+    {
+      "id": 8,
+      "hex": "#00968850",
+      "name": "cyan"
+    },
+    {
+      "id": 9,
+      "hex": "#4caf5050",
+      "name": "green"
+    },
+    {
+      "id": 10,
+      "hex": "#8bc34a50",
+      "name": "light-green"
+    },
+    {
+      "id": 11,
+      "hex": "#ffeb3b50",
+      "name": "yellow"
+    },
+    {
+      "id": 12,
+      "hex": "#ffc10750",
+      "name": "amber"
+    },
+    {
+      "id": 13,
+      "hex": "#ff980050",
+      "name": "orange"
+    },
+    {
+      "id": 14,
+      "hex": "#ff572250",
+      "name": "deep-orange"
+    },
+    {
+      "id": 15,
+      "hex": "#9e9e9e50",
+      "name": "gray"
+    }
+  ]
+}

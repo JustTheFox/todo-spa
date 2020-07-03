@@ -1,6 +1,22 @@
-$font: 'AvenirNextCyr', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-sans-serif;
+// Fonts
+$font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+$font-size: 14px;
+$font-weight: 400;
 
-$content-width: 550px;
-$field-height: 38px;
+// Media Queries
+$mobile: 474px;
+$fablet: 767px;
+$tablet: 1023px;
+$laptop: 1279px;
+$desktop: 1919px;
+
+// Sizes
+$max-content-width: 1280px;
+
+// Animation
+$animation-play-time: 150ms;
+$animation-play-time-double: 300ms;
+$animation-timing-function: ease;
+$base-animation: $animation-play-time $animation-timing-function;
+$double-animation: $animation-play-time-double $animation-timing-function;

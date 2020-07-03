@@ -1,14 +1,13 @@
 import React from 'react';
-import Header from '../header/header';
-import Content from '../content/content';
+import { Header } from '../header/header';
+import { Content } from '../content/content';
+import './page.scss';
 
-const Page = ({ children }) => {
+export const Page = ({ withoutHeader, children }) => {
   return (
     <>
-      <Header />
+      {!withoutHeader && <Header />}
       <Content>{children}</Content>
     </>
   );
 };
-
-export default Page;

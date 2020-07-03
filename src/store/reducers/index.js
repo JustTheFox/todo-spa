@@ -1,11 +1,14 @@
 import { combineReducers } from 'redux';
-import tasksReducer from './tasks';
-import filterReducer from './filter';
-import searchReducer from './search';
+import boards from './boards';
+import currentBoard from './current-board';
+import lists from './lists';
+import colors from './colors';
+import search from './search';
 
-// eslint-disable-next-line import/prefer-default-export
 export default combineReducers({
-  tasks: tasksReducer,
-  filter: filterReducer,
-  search: searchReducer,
+  boards,
+  currentBoard,
+  lists,
+  colors,
+  search,
 });

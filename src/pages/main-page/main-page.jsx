@@ -1,40 +1,45 @@
-import React from 'react';
-import { useSelector, shallowEqual } from 'react-redux';
-import { createFilter } from 'react-search-input';
-import Page from '../../layout/page/page';
-import TaskForm from '../../components/task-form/task-form';
-import FilterList from '../../components/filter/filter-list';
-import TaskList from '../../components/task-list/task-list';
-import TaskItem from '../../components/task-item/task-item';
-import { getFilteredTasks } from '../../store/selectors';
+import React, { useEffect, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleBoardAction } from '../../store/actions/boards';
+import { Page } from '../../layout/page';
+import { Title } from '../../components/title';
+import { fetchBoardsAction } from '../../store/actions/boards';
+import { BoardList, BoardItem } from '../../components/boards';
 
-const MainPage = () => {
-  const search = useSelector((store) => store.search);
-  const filter = useSelector((store) => store.filter) || [];
-  const tasks =
-    useSelector(
-      (store) => getFilteredTasks(store.tasks, filter),
-      shallowEqual,
-    ) || [];
+export const MainPage = () => {
+  const dispatch = useDispatch();
 
-  const filteredList = tasks
-    .filter(createFilter(search, ['title', 'description']))
-    .map(({ id, ...props }) => <TaskItem key={id} id={id} {...props} />);
+  useEffect(() => {
+    dispatch(fetchBoardsAction());
+  }, []);
 
-  const renderTaskList = () =>
-    filteredList.length === 0 ? (
-      <p>Задачи не найдены</p>
-    ) : (
-      <TaskList>{filteredList}</TaskList>
-    );
+  const toggleBoard = useCallback(
+    (id) => {
+      dispatch(toggleBoardAction(id));
+    },
+    [dispatch],
+  );
+
+  const isFetching = useSelector((store) => store.boards.isFetching);
+  const boards = useSelector((store) => store.boards.items) || [];
 
   return (
     <Page>
-      <TaskForm />
-      <FilterList />
-      {renderTaskList()}
+      <Title>Boards</Title>
+      {isFetching && <p>Loading...</p>}
+      <BoardList>
+        {boards.map(({ id, title, favorite, color = '' }) => (
+          <BoardItem
+            key={id}
+            id={id}
+            favorite={favorite}
+            color={color}
+            onToggle={toggleBoard}
+          >
+            {title}
+          </BoardItem>
+        ))}
+      </BoardList>
     </Page>
   );
 };
-
-export default MainPage;

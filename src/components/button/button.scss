@@ -1,15 +1,42 @@
 @import '../../styles/index';
 
 .btn {
+  height: 32px;
+  padding: 0 8px;
+  border: none;
+  border-radius: 3px;
+  background: rgba(9, 30, 66, 0.04);
   color: var(--theme-ui-colors-button-text-primary);
+  font-size: 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: background $base-animation;
+
+  &:hover,
+  &:focus {
+    background: rgba(9, 30, 66, 0.08);
+  }
+
+  & + & {
+    margin-left: 4px;
+  }
 
   &-icon {
-    display: inline-flex !important;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
   }
 
   &--toggle {
     color: var(--theme-ui-colors-button-text-secondary);
+  }
+
+  &--transparent {
+    background: transparent;
+
+    &:hover,
+    &:focus {
+      background-color: rgba(9, 30, 66, 0.08);
+    }
   }
 }

@@ -1,0 +1,57 @@
+@import '../../../styles/index';
+
+.board-item {
+  display: inline-block;
+  height: 150px;
+  border-radius: 3px;
+  background-color: rgba(9, 30, 66, 0.04);
+  position: relative;
+
+  &__wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+  }
+
+  &__link {
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 48px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  &__button {
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  &__title {
+    display: block;
+    max-height: 40px;
+    width: 100%;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    color: #000;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+  }
+}

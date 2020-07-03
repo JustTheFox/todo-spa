@@ -1,0 +1,42 @@
+@import '../../../styles/index';
+
+.card-task {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 3px;
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
+
+  &:hover &,
+  &--edit & {
+    &__buttons {
+      opacity: 1;
+    }
+  }
+
+  & + & {
+    margin-top: 8px;
+  }
+
+  &__title {
+    @include flex(1, 1);
+    margin: 0;
+    padding-right: 8px;
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: 12px;
+    opacity: 0;
+  }
+
+  &__form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+}

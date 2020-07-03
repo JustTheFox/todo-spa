@@ -1,0 +1,45 @@
+@import '../../../styles/index';
+
+.color-field {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 8px 0;
+  margin: -4px;
+
+  &-item {
+    &__input {
+      display: none;
+    }
+
+    &__label {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      border: 1px solid gray;
+      margin: 4px;
+      border-radius: 50%;
+      cursor: pointer;
+      position: relative;
+
+      &:before {
+        content: '';
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        border: 2px solid gray;
+        border-radius: 50%;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: opacity $base-animation;
+      }
+    }
+
+    &__input:checked + &__label:before {
+      opacity: 1;
+    }
+  }
+}
