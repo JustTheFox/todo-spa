@@ -5,7 +5,7 @@ import './logo.scss';
 const Logo = () => {
   return (
     <Link to="/" className="logo">
-      Todo App
+      JustTODO
     </Link>
   );
 };
