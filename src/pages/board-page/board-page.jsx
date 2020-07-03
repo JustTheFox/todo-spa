@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
+  fetchBoardColorAction,
   fetchBoardAction,
   toggleBoardAction,
   editBoardAction,
@@ -34,13 +35,14 @@ export const BoardPage = () => {
   }, []);
 
   const board = useSelector((store) => store.currentBoard.item) || {};
+  const color = useSelector((store) => store.currentBoard.color) || {};
   const isFetching = useSelector((store) => store.lists.isFetching);
   const lists = useSelector((store) => store.lists.items) || [];
 
   useEffect(() => {
-    document.body.style.backgroundColor = board?.color?.hex || 'transparent';
+    document.body.style.backgroundColor = color?.hex || 'transparent';
     return () => (document.body.style.backgroundColor = '');
-  }, [board]);
+  }, [board, color]);
 
   const toggleBoard = useCallback(
     (boardId, board) => {

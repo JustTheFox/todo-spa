@@ -1,4 +1,7 @@
 import {
+  // FETCH_CURRENT_BOARD_COLOR_STARTED,
+  FETCH_CURRENT_BOARD_COLOR_SUCCESS,
+  FETCH_CURRENT_BOARD_COLOR_FAILURE,
   FETCH_CURRENT_BOARD_STARTED,
   FETCH_CURRENT_BOARD_SUCCESS,
   FETCH_CURRENT_BOARD_FAILURE,
@@ -12,6 +15,7 @@ import {
 
 const initialState = {
   item: {},
+  color: {},
   isFetching: false,
   error: null,
 };
@@ -33,6 +37,16 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         isFetching: false,
+        error: payload,
+      };
+    case FETCH_CURRENT_BOARD_COLOR_SUCCESS:
+      return {
+        ...state,
+        color: { ...payload },
+      };
+    case FETCH_CURRENT_BOARD_COLOR_FAILURE:
+      return {
+        ...state,
         error: payload,
       };
     case TOGGLE_CURRENT_BOARD_SUCCESS:
@@ -62,6 +76,7 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         item: {},
+        color: {},
         isFetching: false,
         error: '',
       };

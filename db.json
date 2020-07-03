@@ -2,9 +2,14 @@
   "boards": [
     {
       "id": 1,
-      "title": "Board 123",
+      "title": "Board 1234",
       "favorite": true,
-      "colorId": 13
+      "colorId": 10,
+      "color": {
+        "id": 6,
+        "hex": "#2196f350",
+        "name": "blue"
+      }
     },
     {
       "title": "Board 2",
@@ -103,11 +108,6 @@
       "id": 14
     },
     {
-      "listId": 15,
-      "title": "12345",
-      "id": 16
-    },
-    {
       "listId": 16,
       "title": "sadasdasd",
       "id": 17
@@ -121,7 +121,7 @@
     },
     {
       "id": 2,
-      "hex": "#f4433650",
+      "hex": "rgba(244, 67, 54, 0.314",
       "name": "red"
     },
     {

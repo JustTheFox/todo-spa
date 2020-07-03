@@ -15,7 +15,7 @@ export const fetchBoards = () => {
 };
 
 export const fetchBoard = (id) => {
-  return api.get(`/boards/${id}?_expand=color`);
+  return api.get(`/boards/${id}`);
 };
 
 export const createBoard = (params) => {
@@ -64,4 +64,8 @@ export const deleteTask = (id) => {
 
 export const fetchColors = (id) => {
   return api.get('/colors?_sort=id&_order=asc');
+};
+
+export const fetchColor = (id) => {
+  return api.get(`/colors/${id}`);
 };

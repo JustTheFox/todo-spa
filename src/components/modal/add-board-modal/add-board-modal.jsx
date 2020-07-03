@@ -12,7 +12,7 @@ export const AddBoardModal = ({
   ...props
 }) => {
   const [value, setValue] = useState(initialState?.title || '');
-  const [color, setColor] = useState(initialState?.color || 0);
+  const [color, setColor] = useState(initialState?.colorId || 1);
 
   const dispatch = useDispatch();
 

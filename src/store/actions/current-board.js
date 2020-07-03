@@ -1,4 +1,7 @@
 import {
+  // FETCH_CURRENT_BOARD_COLOR_STARTED,
+  FETCH_CURRENT_BOARD_COLOR_SUCCESS,
+  FETCH_CURRENT_BOARD_COLOR_FAILURE,
   FETCH_CURRENT_BOARD_STARTED,
   FETCH_CURRENT_BOARD_SUCCESS,
   FETCH_CURRENT_BOARD_FAILURE,
@@ -9,7 +12,45 @@ import {
   DELETE_CURRENT_BOARD_SUCCESS,
   DELETE_CURRENT_BOARD_FAILURE,
 } from '../const';
-import { fetchBoard, editBoard, deleteBoard } from '../../services/api';
+import {
+  fetchBoard,
+  fetchColor,
+  editBoard,
+  deleteBoard,
+} from '../../services/api';
+
+// export const fetchBoardColorStart = () => {
+//   return {
+//     type: FETCH_CURRENT_BOARD_COLOR_STARTED,
+//   };
+// };
+
+export const fetchBoardColorSuccess = (data) => {
+  return {
+    type: FETCH_CURRENT_BOARD_COLOR_SUCCESS,
+    payload: data,
+  };
+};
+
+export const fetchBoardColorFailure = (error) => {
+  return {
+    type: FETCH_CURRENT_BOARD_COLOR_FAILURE,
+    payload: error,
+  };
+};
+
+export const fetchBoardColorAction = (id) => (dispatch) => {
+  // dispatch(fetchBoardStart());
+  fetchColor(id)
+    .then(({ data }) => {
+      console.log(id, data);
+
+      dispatch(fetchBoardColorSuccess(data));
+    })
+    .catch(({ message }) => {
+      dispatch(fetchBoardColorFailure(message));
+    });
+};
 
 export const fetchBoardStart = () => {
   return {
@@ -36,6 +77,14 @@ export const fetchBoardAction = (id) => (dispatch) => {
   fetchBoard(id)
     .then(({ data }) => {
       dispatch(fetchBoardSuccess(data));
+
+      fetchColor(data.colorId)
+        .then(({ data: colorData }) => {
+          dispatch(fetchBoardColorSuccess(colorData));
+        })
+        .catch(({ message }) => {
+          dispatch(fetchBoardColorFailure(message));
+        });
     })
     .catch(({ message }) => {
       dispatch(fetchBoardFailure(message));
@@ -80,6 +129,14 @@ export const editBoardAction = (id, params) => (dispatch) => {
   })
     .then(({ data }) => {
       dispatch(editBoardSuccess(data));
+
+      fetchColor(data.colorId)
+        .then(({ data: colorData }) => {
+          dispatch(fetchBoardColorSuccess(colorData));
+        })
+        .catch(({ message }) => {
+          dispatch(fetchBoardColorFailure(message));
+        });
     })
     .catch(({ message }) => {
       dispatch(editBoardFailure(message));
